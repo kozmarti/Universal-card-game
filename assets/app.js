@@ -10,6 +10,7 @@ import './styles/app.scss';
 
 // start the Stimulus application
 import './bootstrap';
+import './info.js';
 
 require ('../vendor/frvaillant/mapux/Resources/assets/js/map.js')
 require('@fortawesome/fontawesome-free/css/all.min.css');
