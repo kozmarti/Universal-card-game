@@ -2,25 +2,25 @@
 
 namespace App\Repository;
 
-use App\Entity\Cards;
+use App\Entity\Card;
 use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
 use Doctrine\Persistence\ManagerRegistry;
 
 /**
- * @method Cards|null find($id, $lockMode = null, $lockVersion = null)
- * @method Cards|null findOneBy(array $criteria, array $orderBy = null)
- * @method Cards[]    findAll()
- * @method Cards[]    findBy(array $criteria, array $orderBy = null, $limit = null, $offset = null)
+ * @method Card|null find($id, $lockMode = null, $lockVersion = null)
+ * @method Card|null findOneBy(array $criteria, array $orderBy = null)
+ * @method Card[]    findAll()
+ * @method Card[]    findBy(array $criteria, array $orderBy = null, $limit = null, $offset = null)
  */
-class CardsRepository extends ServiceEntityRepository
+class CardRepository extends ServiceEntityRepository
 {
     public function __construct(ManagerRegistry $registry)
     {
-        parent::__construct($registry, Cards::class);
+        parent::__construct($registry, Card::class);
     }
 
     // /**
-    //  * @return Cards[] Returns an array of Cards objects
+    //  * @return Card[] Returns an array of Card objects
     //  */
     /*
     public function findByExampleField($value)
@@ -37,7 +37,7 @@ class CardsRepository extends ServiceEntityRepository
     */
 
     /*
-    public function findOneBySomeField($value): ?Cards
+    public function findOneBySomeField($value): ?Card
     {
         return $this->createQueryBuilder('c')
             ->andWhere('c.exampleField = :val')
