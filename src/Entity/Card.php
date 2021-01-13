@@ -2,13 +2,13 @@
 
 namespace App\Entity;
 
-use App\Repository\CardsRepository;
+use App\Repository\CardRepository;
 use Doctrine\ORM\Mapping as ORM;
 
 /**
- * @ORM\Entity(repositoryClass=CardsRepository::class)
+ * @ORM\Entity(repositoryClass=CardRepository::class)
  */
-class Cards
+class Card
 {
     /**
      * @ORM\Id
@@ -25,7 +25,7 @@ class Cards
     /**
      * @ORM\ManyToOne(targetEntity=User::class, inversedBy="cards")
      */
-    private $player;
+    private $user;
 
     /**
      * @ORM\Column(type="boolean")
@@ -35,12 +35,12 @@ class Cards
     /**
      * @ORM\Column(type="boolean")
      */
-    private $IsDiscard;
+    private $isDiscard;
 
     /**
      * @ORM\ManyToOne(targetEntity=User::class, inversedBy="discards")
      */
-    private $playerDiscard;
+    private $userDiscard;
 
     public function getId(): ?int
     {
@@ -59,14 +59,14 @@ class Cards
         return $this;
     }
 
-    public function getPlayer(): ?User
+    public function getUser(): ?User
     {
-        return $this->player;
+        return $this->user;
     }
 
-    public function setPlayer(?User $player): self
+    public function setUser(?User $user): self
     {
-        $this->player = $player;
+        $this->user = $user;
 
         return $this;
     }
@@ -85,24 +85,24 @@ class Cards
 
     public function getIsDiscard(): ?bool
     {
-        return $this->IsDiscard;
+        return $this->isDiscard;
     }
 
-    public function setIsDiscard(bool $IsDiscard): self
+    public function setIsDiscard(bool $isDiscard): self
     {
-        $this->IsDiscard = $IsDiscard;
+        $this->isDiscard = $isDiscard;
 
         return $this;
     }
 
-    public function getPlayerDiscard(): ?User
+    public function getUserDiscard(): ?User
     {
-        return $this->playerDiscard;
+        return $this->userDiscard;
     }
 
-    public function setPlayerDiscard(?User $playerDiscard): self
+    public function setUserDiscard(?User $userDiscard): self
     {
-        $this->playerDiscard = $playerDiscard;
+        $this->userDiscard = $userDiscard;
 
         return $this;
     }
