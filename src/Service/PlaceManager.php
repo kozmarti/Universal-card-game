@@ -6,7 +6,7 @@ namespace App\Service;
 
 class PlaceManager
 {
-    public function ()
+    public function userPlace()
     {
         
     }
