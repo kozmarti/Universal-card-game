@@ -39,7 +39,7 @@
 
 
 
-<div class="mycards d-flex">
+<div class="card-container my-cards">
 <h3> {{ app.user.username }} </h3>
     {% for c in cards %}
         {%  if c.user %}
@@ -76,3 +76,13 @@
     </div>
 
 </div>
+
+
+<div class="card-container">
+<h3> Visible cards on table </h3>
+
+{% for c in cards %}
+    {%  if c.isVisible %}
+        <img src="{{ c.image }}" alt="">
+    {% endif %}
+{% endfor %}
