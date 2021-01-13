@@ -46,7 +46,6 @@ class DistributionController extends AbstractController
             $cardIds[] = $cardInDeck->getId();
         }
 
-
         foreach ($distributionNumbers as $userId => $distributionNumber) {
             for ($i=1; $i<$distributionNumber+1;$i++) {
                 $randCardsId = array_rand(array_flip($cardIds));
@@ -56,19 +55,14 @@ class DistributionController extends AbstractController
                 $user = $userRepository->find($userId);
                 $card->setUser($user);
                 $card->setIsInDeck(0);
+                $this->entityManager->persist($card);
             }
-            $this->entityManager->persist($card);
         }
 
         $this->entityManager->flush();
-        $users = $userRepository->findAll();
-        $cards = $cardRepository->findAll();
 
-        return $this->render('home/game-distrib.html.twig', [
-            'users' => $users,
-            'cards' => $cards
 
-        ]);
+        return $this->redirectToRoute('game');
     }
 
 
