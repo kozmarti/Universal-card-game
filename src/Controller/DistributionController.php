@@ -98,7 +98,10 @@ class DistributionController extends AbstractController
         $cardToPlay = $request->request->all();
 
         $card = $cardRepository->find($cardToPlay['card-to-play']);
-
+        /*
+         * added isVisible on card play for debug, we will refractor this after everyone is ok with the database :)
+         */
+        $card->setIsVisible(1);
         $card->setIsPlayed(1);
         $card->setUser(null);
         $this->entityManager->persist($card);
@@ -133,13 +136,53 @@ class DistributionController extends AbstractController
     public function discardCardPersonal(Request $request,CardRepository $cardRepository): Response
     {
         $userId = $this->getUser();
-        $cardToPlay = $request->request->all();
-        $card = $cardRepository->find($cardToPlay['card-to-play']);
+        $cardToDiscard = $request->request->all();
+        $card = $cardRepository->find($cardToDiscard['card-to-discard']);
         $card->setUserDiscard($userId);
         $card->setUser(null);
+        $card->setIsVisible(0);
+        $card->setIsPlayed(0);
         $this->entityManager->persist($card);
         $this->entityManager->flush();
         return $this->redirectToRoute('game');
     }
+
+
+    /**
+     *  * @Route("/discardCard", name="discard_card")
+     */
+    public function discardCard(Request $request,CardRepository $cardRepository): Response
+    {
+        $cardToDiscard = $request->request->all();
+        $card = $cardRepository->find($cardToDiscard['card-to-discard']);
+        $card->setUser(null);
+        $card->setIsDiscard(1);
+        $card->setIsVisible(0);
+        $card->setIsPlayed(0);
+        $this->entityManager->persist($card);
+        $this->entityManager->flush();
+        return $this->redirectToRoute('game');
+    }
+
+    /**
+     *  * @Route("/takeCard", name="take_card")
+     */
+    public function takeCard(Request $request,CardRepository $cardRepository): Response
+    {
+        $cardToTake = $request->request->all();
+        $card = $cardRepository->find($cardToTake['card-to-take']);
+        $card->setUser($this->getUser());
+        $card->setIsVisible(0);
+        $card->setIsPlayed(0);
+        $card->setIsDiscard(0);
+        $card->setUserDiscard(null);
+        $this->entityManager->persist($card);
+        $this->entityManager->flush();
+        return $this->redirectToRoute('game');
+    }
+
+
+
+
 
 }

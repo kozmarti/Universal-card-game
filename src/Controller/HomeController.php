@@ -88,20 +88,16 @@ class HomeController extends AbstractController
         $zone = $zoneRepository->findOneBy([]);
         $form = $this->createForm(ZoneType::class, $zone);
         $form->handleRequest($request);
-
         $players=$userRepository->findAll();
         $deckCards=$cardRepository->findBy(['isInDeck' => true]);
         $lastPlayedCard=$cardRepository->findLastPlayedCard();
         $users = $userRepository->findAll();
-
-
 
         if ($form->isSubmitted() && $form->isValid()) {
             $entityManager->persist($zone);
             $entityManager->flush();
             return $this->json($zone, 200);
         }
-
 
         $zones = $zoneRepository->findAll();
         foreach ($zones as $zone) {
