@@ -49,6 +49,9 @@
                     <input type="hidden" name="card-to-play" value="{{ c.id }}">
                     <button type="submit">PLAY</button>
                 </form>
+                <form action="{{ path("discard_card_personal") }}" method="post">
+                    <input type="hidden" name="card-to-play" value="{{ c.id }}">
+                </form>
             {% endif %}
         {% endif %}
 
