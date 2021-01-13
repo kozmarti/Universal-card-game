@@ -22,6 +22,7 @@ class CardsFixtures extends Fixture implements ContainerAwareInterface
             $card->setImage($data['image']);
             $card->setIsInDeck(true);
             $card->setIsDiscard(false);
+            $card->setIsVisible(false);
             $manager->persist($card);
         }
         $manager->flush();
