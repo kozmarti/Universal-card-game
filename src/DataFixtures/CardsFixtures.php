@@ -2,9 +2,11 @@
 namespace App\DataFixtures;
 use App\Entity\Card;
 use Doctrine\Bundle\FixturesBundle\Fixture;
+
 use Doctrine\Persistence\ObjectManager;
 use Symfony\Component\DependencyInjection\ContainerAwareInterface;
 use Symfony\Component\DependencyInjection\ContainerInterface;
+
 class CardsFixtures extends Fixture implements ContainerAwareInterface
 {
     private $container;
@@ -12,6 +14,7 @@ class CardsFixtures extends Fixture implements ContainerAwareInterface
     {
         $this->container = $container;
     }
+
     public function load(ObjectManager $manager)
     {
         $serializer = $this->container->get('serializer');
@@ -23,6 +26,7 @@ class CardsFixtures extends Fixture implements ContainerAwareInterface
             $card->setIsInDeck(true);
             $card->setIsDiscard(false);
             $card->setIsVisible(false);
+            $card->setIsPlayed(false);
             $manager->persist($card);
         }
         $manager->flush();
