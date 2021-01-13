@@ -66,6 +66,31 @@ class DistributionController extends AbstractController
     }
 
     /**
+     * @Route("/distributeOneCard", name="distribute_one_card")
+     */
+    public function distributeOneCard(UserRepository $userRepository, Request $request, CardRepository $cardRepository): Response
+    {
+
+        $cardsInDeck = $cardRepository->findBy(['isInDeck' => 1]);
+        foreach ($cardsInDeck as $cardInDeck) {
+            $cardIds[] = $cardInDeck->getId();
+        }
+
+        $randCardsId = array_rand(array_flip($cardIds));
+        $key = array_search($randCardsId, $cardIds);
+        unset($cardIds[$key]);
+        $card = $cardRepository->find($randCardsId);
+        $user = $this->getUser();
+        $card->setUser($user);
+        $card->setIsInDeck(0);
+        $this->entityManager->persist($card);
+
+        $this->entityManager->flush();
+
+        return $this->redirectToRoute('game');
+    }
+
+     /**
      * @Route("/playcard", name="play_card")
      */
     public function playCard(UserRepository $userRepository, Request $request, CardRepository $cardRepository): Response
@@ -79,7 +104,7 @@ class DistributionController extends AbstractController
         $this->entityManager->persist($card);
         $this->entityManager->flush();
 
-        return $this->redirectToRoute('game');
+      return $this->redirectToRoute('game');
     }
 
     /**
