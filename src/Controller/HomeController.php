@@ -4,6 +4,7 @@
 namespace App\Controller;
 
 use App\Repository\CardRepository;
+use App\Repository\UserRepository;
 use MapUx\Model\Icon;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\HttpFoundation\Request;
@@ -36,12 +37,18 @@ class HomeController extends AbstractController
      * @Route("/game", name="game")
      */
 
-    public function game(CardRepository $cardRepository): Response
+    public function game(CardRepository $cardRepository, UserRepository $userRepository): Response
     {
+
+        $players=$userRepository->findAll();
+        $deckCards=$cardRepository->findBy(['isInDeck' => true]);
 
 
         return $this->render('home/game.html.twig', [
             'cards' => $cardRepository->findAll(),
+            'players' =>$players,
+            'count_cards_in_deck' => count($deckCards),
+            'decks' => $deckCards,
 
         ]);
     }
