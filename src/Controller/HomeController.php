@@ -3,8 +3,11 @@
 
 namespace App\Controller;
 
+use App\Form\ZoneType;
 use App\Repository\CardRepository;
 use App\Repository\UserRepository;
+use App\Repository\ZoneRepository;
+use Doctrine\ORM\EntityManagerInterface;
 use MapUx\Model\Icon;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\HttpFoundation\Request;
@@ -37,14 +40,24 @@ class HomeController extends AbstractController
      * @Route("/game", name="game")
      */
 
-    public function game(CardRepository $cardRepository, UserRepository $userRepository): Response
+
+    public function game(CardRepository $cardRepository, ZoneRepository $zoneRepository,UserRepository $userRepository, Request $request, EntityManagerInterface $entityManager): Response
+
     {
+        $zone = $zoneRepository->findOneBy([]);
+        $form = $this->createForm(ZoneType::class, $zone);
+        $form->handleRequest($request);
 
         $players=$userRepository->findAll();
         $deckCards=$cardRepository->findBy(['isInDeck' => true]);
         $lastPlayedCard=$cardRepository->findLastPlayedCard();
         $users = $userRepository->findAll();
 
+        if ($form->isSubmitted() && $form->isValid()) {
+            $entityManager->persist($zone);
+            $entityManager->flush();
+            return $this->json($zone, 200);
+        }
 
         return $this->render('home/game.html.twig', [
             'cards' => $cardRepository->findAll(),
@@ -53,7 +66,6 @@ class HomeController extends AbstractController
             'decks' => $deckCards,
             'users' =>$users,
             'last_played_card' => $lastPlayedCard
-
         ]);
     }
 
