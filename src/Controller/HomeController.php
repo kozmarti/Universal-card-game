@@ -11,6 +11,8 @@ use Symfony\Component\Routing\Annotation\Route;
 use MapUx\Builder\MapBuilder;
 use MapUx\Model\Marker;
 use MapUx\Model\Popup;
+use Symfony\UX\Chartjs\Builder\ChartBuilderInterface;
+use Symfony\UX\Chartjs\Model\Chart;
 
 
 class HomeController extends AbstractController
