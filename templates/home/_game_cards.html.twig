@@ -51,6 +51,7 @@
                 </form>
                 <form action="{{ path("discard_card_personal") }}" method="post">
                     <input type="hidden" name="card-to-play" value="{{ c.id }}">
+                    <button type="submit">DISCARD CARD INTO PERSONAL PILE</button>
                 </form>
             {% endif %}
         {% endif %}
