@@ -3,6 +3,7 @@
 
 namespace App\Controller;
 
+use App\Repository\CardRepository;
 use MapUx\Model\Icon;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\HttpFoundation\Request;
@@ -24,8 +25,24 @@ class HomeController extends AbstractController
     public function index(): Response
     {
 
+
         return $this->render('home/index.html.twig', [
             'hello' => 'hiiiiii'
         ]);
     }
+
+    /**
+     * @Route("/game", name="game")
+     */
+
+    public function game(CardRepository $cardRepository): Response
+    {
+
+
+        return $this->render('home/game.html.twig', [
+            'cards' => $cardRepository->findAll()
+        ]);
+    }
+
+
 }
