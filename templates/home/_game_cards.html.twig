@@ -1,10 +1,78 @@
+<div class="row">
+    <div class="col-8">
+        <img class="fond" src="{{ asset("build/cards.jpeg") }}" alt="dds">
+    </div>
+
+</div>
+{% for p in players %}
+    {%  if p.id != app.user.id %}
+        <h3>{{ p.username }}</h3>
+
+        <div class="card-container">
+        {% for c in cards %}
+
+            {%  if c.user %}
+            {%  if c.user.id == p.id %}
+                <div class="hidden-card-background">
+            <img class="hidden-card" src="{{ c.image }}" alt="">
+                </div>
+            {% endif %}
+            {% endif %}
+
+
+            {%  if c.userDiscard %}
+                {%  if c.userDiscard.id == p.id %}
+                    <div class="hidden-card-background">
+                        <img class="hidden-card" src="{{ c.image }}" alt="">
+                    </div>
+                    {{ loop.index }}
+                {% endif %}
+            {% endif %}
+
+
+
+        {% endfor %}
+
+        </div>
+    {% endif %}
+{% endfor %}
+
+
+
 <div class="mycards d-flex">
-{{ app.user.username }}
+<h3> {{ app.user.username }} </h3>
     {% for c in cards %}
         {%  if c.user %}
             {%  if c.user.id == app.user.id %}
         <img src="{{ c.image }}" alt="">
             {% endif %}
         {% endif %}
+
+
+        {%  if c.userDiscard %}
+            {%  if c.userDiscard.id == app.user.id %}
+                <div class="hidden-card-background">
+                    <img class="hidden-card" src="{{ c.image }}" alt="">
+                </div>
+                {{ loop.index }}
+            {% endif %}
+        {% endif %}
+
+
+
     {% endfor %}
+
+
+
+</div>
+
+
+
+<h3> In deck : {{ count_cards_in_deck}} </h3>
+<div class="card-container">
+
+    <div class="hidden-card-background">
+    <img class="hidden-card"  alt="">
+    </div>
+
 </div>

@@ -1,13 +1,30 @@
 @import "~bootstrap/scss/bootstrap";
 
-
-
 body {
 
 }
 
 .fond {
-
     width: 50%;
+}
 
+.hidden-card {
+    opacity: 0;
+
+}
+
+.hidden-card-background{
+    margin: 5px;
+    width:150px;
+    height: 200px;
+    background-color: #999999;
+    border: 1px solid black;
+    border-radius: 10px;
+}
+
+.card-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-wrap: wrap;
 }
