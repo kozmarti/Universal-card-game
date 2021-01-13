@@ -1,4 +1,9 @@
 {% extends 'base.html.twig' %}
 {% block body %}
 <h1>{{ hello }}</h1>
+
+    <a href="{{ path("app_login") }}">Login</a>
+    <br>
+    
+    <a href="{{ path("app_register") }}">Register</a>
 {% endblock %}
