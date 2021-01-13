@@ -1,4 +1,8 @@
 {% extends 'base.html.twig' %}
 {% block body %}
-    <h1>{{ hello }}</h1>
+
+
+    {% for c in cards %}
+        <img src="{{ c.image }}" alt="">
+    {% endfor %}
 {% endblock %}
