@@ -1,8 +1,6 @@
 {% extends 'base.html.twig' %}
 {% block body %}
+{% include '/home/_game_cards.html.twig' %}
 
 
-    {% for c in cards %}
-        <img src="{{ c.image }}" alt="">
-    {% endfor %}
 {% endblock %}
