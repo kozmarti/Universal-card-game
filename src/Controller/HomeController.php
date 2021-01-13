@@ -42,6 +42,7 @@ class HomeController extends AbstractController
 
         $players=$userRepository->findAll();
         $deckCards=$cardRepository->findBy(['isInDeck' => true]);
+        $lastPlayedCard=$cardRepository->findLastPlayedCard();
         $users = $userRepository->findAll();
 
 
@@ -51,6 +52,7 @@ class HomeController extends AbstractController
             'count_cards_in_deck' => count($deckCards),
             'decks' => $deckCards,
             'users' =>$users,
+            'last_played_card' => $lastPlayedCard
 
         ]);
     }
