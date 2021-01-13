@@ -1,0 +1,10 @@
+<div class="mycards d-flex">
+{{ app.user.username }}
+    {% for c in cards %}
+        {%  if c.user %}
+            {%  if c.user.id == app.user.id %}
+        <img src="{{ c.image }}" alt="">
+            {% endif %}
+        {% endif %}
+    {% endfor %}
+</div>

@@ -57,14 +57,10 @@ class DistributionController extends AbstractController
                 $card->setUser($user);
                 $card->setIsInDeck(0);
             }
-
-
             $this->entityManager->persist($card);
-
         }
 
         $this->entityManager->flush();
-
         $users = $userRepository->findAll();
         $cards = $cardRepository->findAll();
 

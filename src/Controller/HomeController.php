@@ -26,8 +26,9 @@ class HomeController extends AbstractController
     {
 
 
+
         return $this->render('home/index.html.twig', [
-            'hello' => 'hiiiiii'
+
         ]);
     }
 
@@ -40,7 +41,8 @@ class HomeController extends AbstractController
 
 
         return $this->render('home/game.html.twig', [
-            'cards' => $cardRepository->findAll()
+            'cards' => $cardRepository->findAll(),
+
         ]);
     }
 
