@@ -104,26 +104,28 @@ class DistributionController extends AbstractController
         $this->entityManager->persist($card);
         $this->entityManager->flush();
 
-
-        return $this->redirectToRoute('game');
+      return $this->redirectToRoute('game');
     }
 
-
     /**
-     * @Route("/discardCardPersonal", name="discard_card_personal")
+     * @Route("/playdeckcard", name="play_deck_card")
      */
-    public function discardCardPersonal(UserRepository $userRepository, Request $request, CardRepository $cardRepository): Response
+    public function playDeckCard(UserRepository $userRepository, Request $request, CardRepository $cardRepository): Response
     {
-        $userId = $this->getUser();
-        $cardToPlay = $request->request->all();
-        $card = $cardRepository->find($cardToPlay['card-to-play']);
-        $card->setUserDiscard($userId);
+        $cardsInDeck = $cardRepository->findBy(['isInDeck' => 1]);
+        foreach ($cardsInDeck as $cardInDeck) {
+            $cardIds[] = $cardInDeck->getId();
+        }
+        $randCardsId = array_rand(array_flip($cardIds));
+        $card = $cardRepository->find($randCardsId);
+        $card->setIsPlayed(1);
+        $card->setIsInDeck(0);
         $this->entityManager->persist($card);
         $this->entityManager->flush();
 
+
         return $this->redirectToRoute('game');
     }
-
 
 
 

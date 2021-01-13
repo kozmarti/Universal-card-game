@@ -75,10 +75,15 @@
 
 
 <h3> In deck : {{ count_cards_in_deck}} </h3>
+
 <div class="card-container">
     <div class="hidden-card-background">
     <img class="hidden-card"  alt="">
     </div>
+    <form action="{{ path("play_deck_card") }}" method="post">
+        <input type="hidden" name="card-to-play" value="from-deck-to-play">
+        <button type="submit">PLAY</button>
+    </form>
 </div>
 
 <div class="card-container">
@@ -91,12 +96,10 @@
 </div>
 
 <div class="card-container">
-    <h3> Visible cards on table </h3>
-    {% for c in cards %}
-        {%  if c.isPlayed %}
-            <img src="{{ c.image }}" alt="">
-        {% endif %}
-    {% endfor %}
+    <h3> Played cards </h3>
+    {%  if last_played_card %}
+       <img src="{{ last_played_card.image }}" alt="">
+    {% endif %}
 </div>
 
 
