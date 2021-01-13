@@ -2,7 +2,21 @@
 {% block body %}
 
 
-    <a href="{{ path("app_login") }}">Login</a>
-    <br>
-    <a href="{{ path("app_register") }}">Register</a>
+<div class="container-fluid">
+    <div class="row">
+        <a href="{{ path("app_login") }}">Login</a>
+
+
+        <a href="{{ path("app_register") }}">Register</a>
+    </div>
+    <div class="row">
+        <div class="col-8">
+            <img class="fond" src="{{ asset("build/cards.jpeg") }}" alt="dds">
+        </div>
+        <div class="col-4">
+          textarea
+        </div>
+    </div>
+    <button class="btn btn-success">OK</button>
+</div>
 {% endblock %}
