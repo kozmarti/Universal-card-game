@@ -3,10 +3,12 @@
 namespace App\Entity;
 
 use App\Repository\CardRepository;
+use DateTime;
 use Doctrine\ORM\Mapping as ORM;
 
 /**
  * @ORM\Entity(repositoryClass=CardRepository::class)
+ * @ORM\HasLifecycleCallbacks
  */
 class Card
 {
@@ -41,6 +43,23 @@ class Card
      * @ORM\ManyToOne(targetEntity=User::class, inversedBy="discards")
      */
     private $userDiscard;
+
+    /**
+     * @ORM\Column(type="boolean")
+     */
+    private $isVisible;
+
+    /**
+     * @ORM\Column(type="boolean", nullable=true)
+     */
+    private $isPlayed;
+
+    /**
+     * @var datetime $updatedAt
+     *
+     * @ORM\Column(type="datetime", nullable=true)
+     */
+    private $updatedAt;
 
     public function getId(): ?int
     {
@@ -106,4 +125,52 @@ class Card
 
         return $this;
     }
+
+    public function getIsVisible(): ?bool
+    {
+        return $this->isVisible;
+    }
+
+    public function setIsVisible(bool $isVisible): self
+    {
+        $this->isVisible = $isVisible;
+
+        return $this;
+    }
+
+    public function getIsPlayed(): ?bool
+    {
+        return $this->isPlayed;
+    }
+
+    public function setIsPlayed(?bool $isPlayed): self
+    {
+        $this->isPlayed = $isPlayed;
+
+        return $this;
+    }
+
+    public function getUpdatedAt(): ?\DateTimeInterface
+    {
+        return $this->updatedAt;
+    }
+
+
+    public function setUpdatedAt(?\DateTimeInterface $updatedAt): self
+    {
+        $this->updatedAt = $updatedAt;
+
+        return $this;
+    }
+
+    /**
+     * Gets triggered every time on update
+     * @ORM\PreUpdate
+     */
+    public function onPreUpdate()
+    {
+        $this->updatedAt = new \DateTime("now");
+    }
+
+
 }

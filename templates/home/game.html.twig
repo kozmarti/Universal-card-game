@@ -1,10 +1,9 @@
 {% extends 'base.html.twig' %}
 {% block body %}
-    {% for c in cards %}
-        <img src="{{ c.image }}" alt="">
-    {% endfor %}
     <div class="infos">
         <h2>Information</h2>
         {% include 'zone/_form.html.twig' %}
     </div>
+    {% include '/home/_game_cards.html.twig' %}
+    {% include '/home/_game_distrib.html.twig' %}
 {% endblock %}
