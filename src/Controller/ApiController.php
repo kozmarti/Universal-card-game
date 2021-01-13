@@ -36,7 +36,7 @@ class ApiController extends AbstractController
         $content = $response->toArray();
         $cards= $this->client->request(
             'GET',
-            'https://deckofcardsapi.com/api/deck/new/draw/?count=52'
+            'https://deckofcardsapi.com/api/deck/' . $content['deck_id'] . '/draw/?count=52'
         );
         $cards2= $cards->toArray();
         dd($cards2);
