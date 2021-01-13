@@ -3,12 +3,12 @@
 {% include '/home/_game_cards.html.twig' %}
 
 
-
+    {% include '/home/game-distrib.html.twig' %}
     {% for c in cards %}
         <img src="{{ c.image }}" alt="">
 
 
     {% endfor %}
-    {% include '/home/game-distrib.html.twig' %}
+
 
 {% endblock %}

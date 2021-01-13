@@ -42,6 +42,7 @@ class HomeController extends AbstractController
 
         $players=$userRepository->findAll();
         $deckCards=$cardRepository->findBy(['isInDeck' => true]);
+        $users = $userRepository->findAll();
 
 
         return $this->render('home/game.html.twig', [
@@ -49,6 +50,7 @@ class HomeController extends AbstractController
             'players' =>$players,
             'count_cards_in_deck' => count($deckCards),
             'decks' => $deckCards,
+            'users' =>$users,
 
         ]);
     }
