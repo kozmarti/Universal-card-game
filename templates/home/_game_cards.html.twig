@@ -19,6 +19,8 @@
             {% endif %}
             {% endif %}
 
+        {% endfor %}
+            {% for c in cards %}
 
             {%  if c.userDiscard %}
                 {%  if c.userDiscard.id == p.id %}
@@ -28,11 +30,7 @@
                     {{ loop.index }}
                 {% endif %}
             {% endif %}
-
-
-
-        {% endfor %}
-
+            {% endfor %}
         </div>
     {% endif %}
 {% endfor %}
@@ -51,22 +49,24 @@
                 </form>
                 <form action="{{ path("discard_card_personal") }}" method="post">
                     <input type="hidden" name="card-to-play" value="{{ c.id }}">
-                    <button type="submit">DISCARD CARD INTO PERSONAL PILE</button>
+                    <button type="submit">DISCARD</button>
                 </form>
             {% endif %}
         {% endif %}
 
 
-        {%  if c.userDiscard %}
-            {%  if c.userDiscard.id == app.user.id %}
-                <div class="hidden-card-background">
-                    <img class="hidden-card" src="{{ c.image }}" alt="">
-                </div>
-                {{ loop.index }}
-            {% endif %}
-        {% endif %}
-    {% endfor %}
 
+    {% endfor %}
+    {% for c in cards %}
+    {%  if c.userDiscard %}
+        {%  if c.userDiscard.id == app.user.id %}
+            <div class="hidden-card-background">
+                <img class="hidden-card" src="{{ c.image }}" alt="">
+            </div>
+            {{ loop.index }}
+        {% endif %}
+    {% endif %}
+    {% endfor %}
 
   {% include '/home/_game-distrib-one-card.html.twig' %}
 

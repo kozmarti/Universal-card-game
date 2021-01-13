@@ -66,6 +66,7 @@ class HomeController extends AbstractController
             'decks' => $deckCards,
             'users' =>$users,
             'last_played_card' => $lastPlayedCard
+
         ]);
     }
 
