@@ -1,0 +1,30 @@
+{% extends 'base.html.twig' %}
+{% block body %}
+
+
+
+    <form class="" action="{{ path("distribute")}}" method="post">
+{% for user in users %}
+
+    <ul>
+        <li>
+            {{ user.username }} - <input type="number" name="{{ user.id }}"  value="">
+        </li>
+    </ul>
+
+{% endfor %}
+
+
+    <button type="submit" class="btn btn-success">
+        Distribuer
+    </button>
+
+    </form>
+
+
+
+
+
+{% endblock %}
+
+
