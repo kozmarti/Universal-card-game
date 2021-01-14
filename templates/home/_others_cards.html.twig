@@ -27,7 +27,7 @@
                         {%  if c.user %}
                             {%  if c.user.id == p.id and c.isVisible == 1%}
                                 <div class="hidden-card-background">
-                                    <img src="{{ c.image }}" alt="">
+                                    <img class="visible-card" src="{{ c.image }}" alt="">
                                 </div>
                                 <form action="{{ path("take_card") }}" method="post">
                                     <input type="hidden" name="card-to-take" value="{{ c.id }}">
