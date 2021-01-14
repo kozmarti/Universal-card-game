@@ -2,10 +2,7 @@
     <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarToggler" aria-controls="navbarToggler" aria-expanded="false" aria-label="Toggle navigation">
         <span class="navbar-toggler-icon"></span>
     </button>
-    <div>
-        <h2>Freed Card game</h2>
 
-    </div>
     <div>
         <a class="nav-link" href="{{ path('new_game') }}"><i class="fas fa-2x fa-play"></i></a>
 
@@ -16,7 +13,10 @@
 
             <li class="nav-item">
                 {% if app.user %}
-                    <a class="nav-link" href="{{ path('app_logout') }}"> Logout</a>
+                    <div class="d-flex">
+                    <h3> <i class="fas fa-user"></i> {{  app.user.username }}  </h3>
+                    <a class="nav-link" href="{{ path('app_logout') }}"> | Logout</a>
+                    </div>
                 {% else %}
                     <a class="nav-link" href="{{ path('app_register') }}"> Sign in </a>
                     <a class="nav-link" href="{{ path('app_login') }}"> Login  </a>
