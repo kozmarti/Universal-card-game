@@ -29,9 +29,26 @@ body {
     height: 200px;
 }
 
+#deck-img {
+    position: absolute;
+}
+
+.buttons {
+    display: flex;
+    z-index: 1000;
+    flex-direction: column;
+    justify-content: space-around;
+    align-items: center;
+    h3 {
+        color: black;
+        font-size: 40px;
+    }
+}
+
 .hidden-card-background{
     margin: 5px;
     width:150px;
+    height: 200px;
     border: 1px solid black;
     border-radius: 10px;
     background-image: url("../images/cardback.png");

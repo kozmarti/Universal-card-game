@@ -1,23 +1,21 @@
-
-
 <div class="container-fluid">
-
     <div class="row">
-
         <div class="col">
             <div class="card-container">
-                <h3> In deck : {{ count_cards_in_deck }} </h3>
                 <div class="hidden-card-background">
-                    <img class="hidden-card" alt="">
+                    <img id="deck-img" class="hidden-card" alt="">
+                    <div class="buttons">
+                        {% include '/home/_game_distrib.html.twig' %}
+                        <h3>{{ count_cards_in_deck }} </h3>
+                        <form action="{{ path("play_deck_card") }}" method="post">
+                            <input type="hidden" name="card-to-play" value="from-deck-to-play">
+                            <button type="submit">Play</button>
+                        </form>
+                        <a class="btn btn-dark" href="{{ path("distribute_one_card") }}">Take a card</a>
+                    </div>
                 </div>
-                <form action="{{ path("play_deck_card") }}" method="post">
-                    <input type="hidden" name="card-to-play" value="from-deck-to-play">
-                    <button type="submit">Play</button>
-                </form>
-                <a class="btn btn-dark" href="{{ path("distribute_one_card") }}">Take a card</a>
             </div>
         </div>
-
     </div>
 
     <div class="row">
