@@ -117,7 +117,7 @@ class HomeController extends AbstractController
         $deckCards=$cardRepository->findBy(['isInDeck' => true]);
         $deckDiscardCards=$cardRepository->findBy(['isDiscard' => true]);
 
-        
+
 
 
         $cards = $cardRepository->findAll();

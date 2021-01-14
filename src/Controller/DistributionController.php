@@ -209,8 +209,18 @@ class DistributionController extends AbstractController
         $visibleCards = $cardRepository->findBy(['isVisible' => 1]);
         foreach ($visibleCards as $visibleCard) {
             $visibleCard->setUserDiscard($user);
+            $visibleCard->setUser(null);
             $visibleCard->setIsVisible(0);
             $visibleCard->setIsPlayed(0);
+            $this->entityManager->persist($visibleCard);
+        }
+
+        $playedCards = $cardRepository->findBy(['isPlayed' => 1]);
+        foreach ($playedCards as $visibleCard) {
+            $visibleCard->setUserDiscard($user);
+            $visibleCard->setIsVisible(0);
+            $visibleCard->setIsPlayed(0);
+            $visibleCard->setUser(null);
             $this->entityManager->persist($visibleCard);
         }
 
@@ -225,6 +235,7 @@ class DistributionController extends AbstractController
     public function discardAllCards(Request $request,CardRepository $cardRepository): Response
     {
         $visibleCards = $cardRepository->findBy(['isVisible' => 1]);
+
         foreach ($visibleCards as $visibleCard) {
         $visibleCard->setUser(null);
         $visibleCard->setIsDiscard(1);
@@ -232,6 +243,16 @@ class DistributionController extends AbstractController
         $visibleCard->setIsPlayed(0);
         $this->entityManager->persist($visibleCard);
     }
+
+        $playedCards = $cardRepository->findBy(['isPlayed' => 1]);
+
+        foreach ($playedCards as $visibleCard) {
+            $visibleCard->setUser(null);
+            $visibleCard->setIsDiscard(1);
+            $visibleCard->setIsVisible(0);
+            $visibleCard->setIsPlayed(0);
+            $this->entityManager->persist($visibleCard);
+        }
 
         $this->entityManager->flush();
         return $this->redirectToRoute('game');
@@ -260,7 +281,6 @@ class DistributionController extends AbstractController
      */
     public function showOneDiscardedPersonalCard(CardRepository $cardRepository): Response
     {
-
         $cardDiscardPerso = $cardRepository->findBy(['userDiscard' => $this->getUser()]);
         foreach ($cardDiscardPerso as $card) {
             $card->setIsVisible(1);
@@ -268,10 +288,10 @@ class DistributionController extends AbstractController
             $card->setUserDiscard(null);
             $this->entityManager->persist($card);
         }
-
         $this->entityManager->flush();
         return $this->redirectToRoute('game');
     }
+
 
     /**
      *  @Route("/showLastDiscardedPersonalCard", name="show_last_discarded_personal_card")
@@ -289,6 +309,4 @@ class DistributionController extends AbstractController
         }
         return $this->redirectToRoute('game');
     }
-
-
 }
