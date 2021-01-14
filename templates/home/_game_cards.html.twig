@@ -4,14 +4,36 @@
             <div class="card-container">
                 <div class="hidden-card-background">
                     <img id="deck-img" class="hidden-card" alt="">
-                    <div class="buttons">
-                        {% include '/home/_game_distrib.html.twig' %}
-                        <h3>{{ count_cards_in_deck }} </h3>
-                        <form action="{{ path("play_deck_card") }}" method="post">
-                            <input type="hidden" name="card-to-play" value="from-deck-to-play">
-                            <button type="submit">Play</button>
-                        </form>
-                        <a class="btn btn-dark" href="{{ path("distribute_one_card") }}">Take a card</a>
+                    <div class="card bg-transparent text-white">
+                        <img src="{{ asset('build/images/cardback.png') }}" class="card-img" alt="">
+                        <div class="card-img-overlay">
+                            <div class="buttons">
+                                {% if count_cards_in_deck == 0 %}
+                                    {% if count_cards_in_discard_deck == 0 %}
+                                        <h3>No more cards available!</h3>
+                                    {% else %}
+                                    <a class="btn btn-secondary" href="{{ path("put_back_discarded") }}"><i class="fas fa-sync-alt"></i></a>
+                                    {% endif %}
+                                {% else %}
+                                    <a class="btn btn-dark" href="{{ path("distribute_one_card") }}"><i class="fas fa-hand-paper"></i></a>
+                                    <div class="mid">
+                                        <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#hand">
+                                            <i class="fas fa-expand-arrows-alt"></i>
+                                        </button>
+                                        <h3>{{ count_cards_in_deck }} </h3>
+                                        <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#personal-discard">
+                                            <i class="fas fa-inbox"></i>
+                                        </button>
+                                    </div>
+                                    <form action="{{ path("play_deck_card") }}" method="post">
+                                        <input type="hidden" name="card-to-play" value="from-deck-to-play">
+                                        <button type="submit"><i class="fas fa-arrow-down"></i></button>
+                                    </form>
+                                {% endif %}
+                            </div>
+                            {% include '/home/_game_distrib_hand.html.twig' %}
+                            {% include '/home/_game_distrib_discard.html.twig' %}
+                        </div>
                     </div>
                 </div>
             </div>
@@ -46,21 +68,6 @@
                 <a class="btn btn-danger" href="{{ path("discard_all_cards") }}">Discard into global</a>
                 <a class="btn btn-info" href="{{ path("discard_cards_personal") }}">Discard into my pile</a>
             </div>
-        </div>
-    </div>
-    <div class="row">
-        <div class="col-4">
-
-
-            <div class="card-container">
-                <h3> Discarded deck : {{ count_cards_in_discard_deck }} </h3>
-                <div class="hidden-card-background">
-                    <img class="hidden-card" alt="">
-                </div>
-
-                <a class="btn btn-secondary" href="{{ path("put_back_discarded") }}">Put all back to deck</a>
-            </div>
-
         </div>
     </div>
 

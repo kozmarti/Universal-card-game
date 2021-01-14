@@ -28,20 +28,37 @@ body {
     width:150px;
     height: 200px;
 }
+.card {
+    width:150px;
+    height: 200px
+}
 
 #deck-img {
     position: absolute;
 }
-
 .buttons {
+    visibility: hidden;
+}
+
+.card-img-overlay:hover .buttons {
+    visibility: visible;
     display: flex;
-    z-index: 1000;
     flex-direction: column;
-    justify-content: space-around;
+    justify-content: center;
     align-items: center;
+    margin-top: 20px;
+    .mid {
+        display: flex;
+        h3 {
+            color: black;
+            font-size: 40px;
+            font-weight: 900;
+        }
+    }
     h3 {
         color: black;
-        font-size: 40px;
+        font-size:30px;
+        font-weight: 900;
     }
 }
 
