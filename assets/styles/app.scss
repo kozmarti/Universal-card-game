@@ -28,6 +28,39 @@ body {
     width:150px;
     height: 200px;
 }
+.card {
+    width:150px;
+    height: 200px
+}
+
+#deck-img {
+    position: absolute;
+}
+.buttons {
+    visibility: hidden;
+}
+
+.card-img-overlay:hover .buttons {
+    visibility: visible;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    margin-top: 20px;
+    .mid {
+        display: flex;
+        h3 {
+            color: black;
+            font-size: 40px;
+            font-weight: 900;
+        }
+    }
+    h3 {
+        color: black;
+        font-size:30px;
+        font-weight: 900;
+    }
+}
 
 .hidden-card-background{
     margin: 5px;
@@ -109,9 +142,9 @@ body {
 .my-visible-card-in-hand {
     padding-top: 80px;
     transition: 0.3s;
+    z-index: 1000 !important;
     &:hover{
         padding-top: 0;
-
     }
 }
 
@@ -136,6 +169,19 @@ body {
     display:flex;
     align-items: center;
     height:40px;
+}
+
+
+
+.pile-personal-discard{
+    position: fixed;
+    bottom: 20px;
+    left:20px;
+}
+
+.my-cards-on-table{
+    display:flex;
+    z-index: 0 !important;
 }
 
 
