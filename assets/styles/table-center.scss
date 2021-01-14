@@ -1,3 +1,5 @@
+@import "variable";
+
 .visible-card {
   margin:8px;
   width:150px;
@@ -7,7 +9,14 @@
 .vlad {
   .hidden-card-background{
     transform: rotate(90deg);
+    z-index:3;
+    &:hover {
+      margin-left: 50px;
+      .take-button {
+        display: inline;
 
+      }
+    }
   }
 
   display : flex;
@@ -20,30 +29,34 @@
 .mathias {
   .hidden-card-background {
     transform: rotate(90deg);
-    margin-left:0;
+    z-index:3;
     &:hover {
       margin-right:50px;
+      .take-button {
+        display: inline;
+
+      }
     }
   }
-
   display: flex;
   flex-direction: row-reverse;
   justify-content: center;
   position: absolute;
   right: 0;
   max-width: 300px;
-
 }
+
+
+
 .take-button {
-  background: red;
   border-radius: 50%;
   box-shadow: 1px 1px 3px 2px lightgray;
   border:none;
   padding: 4px 12px;
-  z-index:100;
   position: absolute;
-  cursor: pointer;
-  right:350px;
+  display:none;
+  transition: 2s;
+  z-index:100;
 }
 
 
@@ -63,10 +76,13 @@
 .other-players {
   display:flex;
   justify-content:center;
+  padding-top:50px;
 }
 
 .other-players-name {
   align-self:center;
   padding:30px;
 }
+
+
 
