@@ -68,7 +68,7 @@ class HomeController extends AbstractController
             'users' => $users,
             'count_cards_in_deck' => count($deckCards),
             'decks' => $deckCards,
-            'html' =>$html
+            'html' =>$html,
             'users' =>$users,
             'last_played_card' => $lastPlayedCard,
         ]);
@@ -94,7 +94,7 @@ class HomeController extends AbstractController
     }
 
 
-
+/**
      * @Route("/newgame", name="new_game")
      */
     public function newGame(CardRepository $cardRepository, ZoneRepository $zoneRepository,UserRepository $userRepository, Request $request, EntityManagerInterface $entityManager): Response
