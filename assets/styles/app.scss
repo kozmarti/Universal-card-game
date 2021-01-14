@@ -1,13 +1,17 @@
 @import "~bootstrap/scss/bootstrap";
 
 body {
-
+    background: repeat url("../images/tapis.jpg");
 }
 
+/*
 .fond {
-
-    width: 50%;
-}
+    position: fixed;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    z-index: -1;
+} */
 
 .navbar {
     background-color: #999999;
