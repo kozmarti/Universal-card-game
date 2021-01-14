@@ -9,6 +9,7 @@ use App\Repository\UserRepository;
 use App\Repository\ZoneRepository;
 use Doctrine\ORM\EntityManagerInterface;
 use MapUx\Model\Icon;
+use phpDocumentor\Reflection\Types\String_;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
@@ -18,7 +19,7 @@ use MapUx\Model\Marker;
 use MapUx\Model\Popup;
 use Symfony\UX\Chartjs\Builder\ChartBuilderInterface;
 use Symfony\UX\Chartjs\Model\Chart;
-
+use Knp\Bundle\MarkdownBundle\MarkdownParserInterface;
 
 class HomeController extends AbstractController
 {
@@ -50,36 +51,50 @@ class HomeController extends AbstractController
      */
 
 
-    public function game(CardRepository $cardRepository, ZoneRepository $zoneRepository,UserRepository $userRepository, Request $request, EntityManagerInterface $entityManager): Response
+    public function game(MarkdownParserInterface $parser,CardRepository $cardRepository, ZoneRepository $zoneRepository,UserRepository $userRepository, Request $request, EntityManagerInterface $entityManager): Response
 
     {
-        $zone = $zoneRepository->findOneBy([]);
-        $form = $this->createForm(ZoneType::class, $zone);
-        $form->handleRequest($request);
+
 
         $players=$userRepository->findAll();
         $deckCards=$cardRepository->findBy(['isInDeck' => true]);
         $lastPlayedCard=$cardRepository->findLastPlayedCard();
         $users = $userRepository->findAll();
 
-        if ($form->isSubmitted() && $form->isValid()) {
-            $entityManager->persist($zone);
-            $entityManager->flush();
-            return $this->json($zone, 200);
-        }
-
+        $html = $parser->transformMarkdown('**COOOOL**');
         return $this->render('home/game.html.twig', [
             'cards' => $cardRepository->findAll(),
             'players' =>$players,
+            'users' => $users,
             'count_cards_in_deck' => count($deckCards),
             'decks' => $deckCards,
+            'html' =>$html
             'users' =>$users,
             'last_played_card' => $lastPlayedCard,
-            'zoneForm' => $form->createView(),
         ]);
     }
 
     /**
+
+     * @Route("/note", name="note")
+     */
+
+    public function noteUpdate(MarkdownParserInterface $parser,ZoneRepository $zoneRepository,UserRepository $userRepository, Request $request, EntityManagerInterface $entityManager): Response
+
+    {
+        $text = $request->get('text-to-update');
+        $html = $parser->transformMarkdown($text);
+        $zone = $zoneRepository->findOneBy(['id' =>1]);
+        $zone->setInformation($html);
+        $entityManager->persist($zone);
+        $entityManager->flush();
+
+        return $this->json($zone, 200);
+
+    }
+
+
+
      * @Route("/newgame", name="new_game")
      */
     public function newGame(CardRepository $cardRepository, ZoneRepository $zoneRepository,UserRepository $userRepository, Request $request, EntityManagerInterface $entityManager): Response
@@ -127,6 +142,7 @@ class HomeController extends AbstractController
             'zoneForm' => $form->createView(),
         ]);
     }
+
 
 
 

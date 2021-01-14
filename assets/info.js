@@ -1,18 +1,27 @@
-let infoText = document.getElementById('zone_information');
-console.log(infoText);
+let infoText = document.getElementById('zone-information');
+let textShow = document.getElementById('text-show');
+
+
 infoText.addEventListener('input', event => {
-    console.log('yes');
-    fetch('/game', {
-        method: 'POST',
-        headers : {
-            'Content-Type': 'application/json',
-            'Accept': 'application/json'
-        }
-    })
-        .then(res => res.json())
-        .then(json => console.log(json));
+    console.log('EVENT');
+    fetch('/note?text-to-update=' + event.target.value)
+        .then( res=>res.json())
+        .then( json => autocomplete(json))
+
 })
 
-function persist(json) {
-    infoText.innerHTML = json.information;
+
+function removeAllChildNodes(parent) {
+    while (parent.firstChild) {
+        parent.removeChild(parent.firstChild);
+    }
 }
+
+function autocomplete(json) {
+    let textToShow=json;
+    let text=textToShow.information;
+    let fill = document.createTextNode(text);
+    removeAllChildNodes(textShow);
+    textShow.appendChild(fill);
+}
+
