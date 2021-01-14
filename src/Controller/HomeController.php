@@ -107,28 +107,19 @@ class HomeController extends AbstractController
 /**
      * @Route("/newgame", name="new_game")
      */
-    public function newGame(CardRepository $cardRepository, ZoneRepository $zoneRepository,UserRepository $userRepository, Request $request, EntityManagerInterface $entityManager): Response
+    public function newGame(CardRepository $cardRepository,UserRepository $userRepository, Request $request, EntityManagerInterface $entityManager): Response
 
     {
-        $zone = $zoneRepository->findOneBy([]);
-        $form = $this->createForm(ZoneType::class, $zone);
-        $form->handleRequest($request);
+
         $players=$userRepository->findAll();
-        $deckCards=$cardRepository->findBy(['isInDeck' => true]);
         $lastPlayedCard=$cardRepository->findLastPlayedCard();
         $users = $userRepository->findAll();
+        $deckCards=$cardRepository->findBy(['isInDeck' => true]);
+        $deckDiscardCards=$cardRepository->findBy(['isDiscard' => true]);
 
-        if ($form->isSubmitted() && $form->isValid()) {
-            $entityManager->persist($zone);
-            $entityManager->flush();
-            return $this->json($zone, 200);
-        }
+        
 
-        $zones = $zoneRepository->findAll();
-        foreach ($zones as $zone) {
-            $zone->setInformation(null);
-            $this->entityManager->persist($zone);
-        }
+
         $cards = $cardRepository->findAll();
         foreach ($cards as $card) {
             $card->setUser(null);
@@ -146,11 +137,11 @@ class HomeController extends AbstractController
         return $this->render('home/game.html.twig', [
             'cards' => $cardRepository->findAll(),
             'players' =>$players,
-            'count_cards_in_deck' => count($deckCards),
             'decks' => $deckCards,
             'users' =>$users,
             'last_played_card' => $lastPlayedCard,
-            'zoneForm' => $form->createView(),
+            'count_cards_in_deck' => count($deckCards),
+            'count_cards_in_discard_deck' => count($deckDiscardCards),
         ]);
     }
 
