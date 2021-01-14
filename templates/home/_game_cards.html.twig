@@ -7,33 +7,29 @@
 {% for p in players %}
     {%  if p.id != app.user.id %}
         <h3>{{ p.username }}</h3>
-
         <div class="card-container">
-        {% for c in cards %}
-
-            {%  if c.user %}
-            {%  if c.user.id == p.id %}
-                <div class="hidden-card-background">
-            <img class="hidden-card" src="{{ c.image }}" alt="">
-                </div>
-
-            {% endif %}
-            {% endif %}
-
-        {% endfor %}
-
-
-
             {% for c in cards %}
-
-            {%  if c.userDiscard %}
-                {%  if c.userDiscard.id == p.id %}
-                    <div class="hidden-card-background">
-                        <img class="hidden-card" src="{{ c.image }}" alt="">
-                    </div>
-                    {{ loop.index }}
+                {%  if c.user %}
+                    {%  if c.user.id == p.id %}
+                        <div class="hidden-card-background">
+                            <img class="hidden-card" src="{{ c.image }}" alt="">
+                        </div>
+                        <form action="{{ path("take_card") }}" method="post">
+                            <input type="hidden" name="card-to-take" value="{{ c.id }}">
+                            <button type="submit">Take Card</button>
+                        </form>
+                    {% endif %}
                 {% endif %}
-            {% endif %}
+            {% endfor %}
+            {% for c in cards %}
+                {%  if c.userDiscard %}
+                    {%  if c.userDiscard.id == p.id %}
+                        <div class="hidden-card-background">
+                            <img class="hidden-card" src="{{ c.image }}" alt="">
+                        </div>
+                        {{ loop.index }}
+                    {% endif %}
+                {% endif %}
             {% endfor %}
         </div>
     {% endif %}
@@ -46,16 +42,18 @@
     {% for c in cards %}
         {%  if c.user %}
             {%  if c.user.id == app.user.id %}
-        <img src="{{ c.image }}" alt="">
+                <img src="{{ c.image }}" alt="">
                 <form action="{{ path("play_card") }}" method="post">
                     <input type="hidden" name="card-to-play" value="{{ c.id }}">
                     <button type="submit">PLAY</button>
                 </form>
-                            {% endif %}
+                <form action="{{ path("discard_card_personal") }}" method="post">
+                    <input type="hidden" name="card-to-play" value="{{ c.id }}">
+                    <button type="submit">DISCARD</button>
+                </form>
+            {% endif %}
         {% endif %}
-
     {% endfor %}
-    
     {% for c in cards %}
         {%  if c.userDiscard %}
             {%  if c.userDiscard.id == app.user.id %}
@@ -66,17 +64,10 @@
                     <input type="hidden" name="card-to-take" value="{{ c.id }}">
                     <button type="submit">Take Card</button>
                 </form>
-
                 {{ loop.index }}
             {% endif %}
         {% endif %}
     {% endfor %}
-
-
-  {% include '/home/_game-distrib-one-card.html.twig' %}
-
-
-
 </div>
 {% include '/home/_game-distrib-one-card.html.twig' %}
 

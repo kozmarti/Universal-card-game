@@ -2,6 +2,7 @@
 
 namespace App\Controller;
 
+use App\Entity\Card;
 use App\Repository\CardRepository;
 use App\Repository\UserRepository;
 use Doctrine\ORM\EntityManagerInterface;
@@ -131,7 +132,7 @@ class DistributionController extends AbstractController
     }
 
     /**
-     *  * @Route("/discardCardPersonal", name="discard_card_personal")
+     * @Route("/discardCardPersonal", name="discard_card_personal")
      */
     public function discardCardPersonal(Request $request,CardRepository $cardRepository): Response
     {
@@ -149,7 +150,7 @@ class DistributionController extends AbstractController
 
 
     /**
-     *  * @Route("/discardCard", name="discard_card")
+     * @Route("/discardCard", name="discard_card")
      */
     public function discardCard(Request $request,CardRepository $cardRepository): Response
     {
@@ -165,7 +166,7 @@ class DistributionController extends AbstractController
     }
 
     /**
-     *  * @Route("/takeCard", name="take_card")
+     * @Route("/takeCard", name="take_card")
      */
     public function takeCard(Request $request,CardRepository $cardRepository): Response
     {
@@ -180,9 +181,4 @@ class DistributionController extends AbstractController
         $this->entityManager->flush();
         return $this->redirectToRoute('game');
     }
-
-
-
-
-
 }
