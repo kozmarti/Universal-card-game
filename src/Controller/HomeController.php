@@ -60,8 +60,13 @@ class HomeController extends AbstractController
         $lastPlayedCard=$cardRepository->findLastPlayedCard();
         $users = $userRepository->findAll();
         $cardPersonalDiscard=$cardRepository->findBy(['userDiscard' => $this->getUser()]);
-        $countPersonlDiscard=count($cardPersonalDiscard);
-
+        $countPersonalDiscard=count($cardPersonalDiscard);
+        $myCardInHands=$cardRepository->findBy(['user' => $this->getUser(), 'isVisible' => 0]);
+        $cardsVisibleOnTable=$cardRepository->findBy(['user' => null, 'isVisible' => 1]);
+        $countCardsVisibleOnTable=count($cardsVisibleOnTable);
+        $myCardInHands=count($myCardInHands);
+        $myCardOnTable=$cardRepository->findBy(['user' => $this->getUser(), 'isVisible' => 1]);
+        $myCardOnTable=count($myCardOnTable);
         $html = $parser->transformMarkdown('**COOOOL**');
         return $this->render('home/game.html.twig', [
             'cards' => $cardRepository->findAll(),
@@ -72,7 +77,10 @@ class HomeController extends AbstractController
             'decks' => $deckCards,
             'html' =>$html,
             'last_played_card' => $lastPlayedCard,
-            'count_personal_discard' =>$countPersonlDiscard
+            'count_personal_discard' =>$countPersonalDiscard,
+            'my_card_on_table' => $myCardOnTable,
+            'my_card_in_hands' => $myCardInHands,
+            'played_cards_visible' =>$countCardsVisibleOnTable
         ]);
     }
 

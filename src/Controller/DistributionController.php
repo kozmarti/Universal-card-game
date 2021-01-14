@@ -204,6 +204,23 @@ class DistributionController extends AbstractController
         return $this->redirectToRoute('game');
     }
 
+    /**
+     * @Route("/takebackmycards", name="take_back_my_cards")
+     */
+    public function takeBackMyCards(UserRepository $userRepository, CardRepository $cardRepository): Response
+    {
+        $cardsInHand = $cardRepository->findBy(['user' => $this->getUser()]);
+        foreach ($cardsInHand as $card) {
+            $card->setIsVisible(0);
+            $this->entityManager->persist($card);
+        }
+        $this->entityManager->flush();
+        return $this->redirectToRoute('game');
+    }
+
+
+
+
 
     /**
      *  @Route("/discardCardsPersonal", name="discard_cards_personal")

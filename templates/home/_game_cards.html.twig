@@ -46,7 +46,7 @@
             <div class="card-container">
                 {% for c in cards %}
                     {% if c.isVisible and not c.user %}
-                        <div>
+                        <div class="card-to-gliss">
                             <img class="visible-card" src="{{ c.image }}" alt="">
                             <form class="d-flex justify-content-center" action="{{ path("take_card") }}" method="post">
                                 <input type="hidden" name="card-to-take" value="{{ c.id }}">
@@ -62,12 +62,30 @@
         </div>
         <div class="col-4"></div>
     </div>
+    {%  if played_cards_visible > 0 %}
     <div class="row">
         <div class="col">
-            <div class="card-container flex-column">
-                <a class="btn btn-danger" href="{{ path("discard_all_cards") }}">Discard into global</a>
-                <a class="btn btn-info" href="{{ path("discard_cards_personal") }}">Discard into my pile</a>
+            <div class="card-container ">
+                <a title="Discard in global deck" class="discard-global" href="{{ path("discard_all_cards") }}"><i class="fas fa-trash-alt"></i><i class="fas fa-users"></i></a>
+                <a title="Discard in personal deck" class="discard-personal" href="{{ path("discard_cards_personal") }}"><i class="fas fa-trash-alt"></i> <i class="fas fa-user"></i></a>
             </div>
+        </div>
+    </div>
+
+    {%  endif %}
+    <div class="row">
+        <div class="col-4">
+
+
+            <div class="card-container">
+                <h3> Discarded deck : {{ count_cards_in_discard_deck }} </h3>
+                <div class="hidden-card-background">
+                    <img class="hidden-card" alt="">
+                </div>
+
+                <a class="btn btn-secondary" href="{{ path("put_back_discarded") }}">Put all back to deck</a>
+            </div>
+
         </div>
     </div>
 

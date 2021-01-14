@@ -116,7 +116,7 @@ body {
 }
 
 .card-to-gliss{
-    width: 120px;
+    width: 80px;
 }
 
 .green-button {
@@ -132,6 +132,63 @@ body {
     transition: 2s;
     cursor: pointer;
 }
+
+
+.discard-global, .discard-personal {
+    background: -webkit-linear-gradient($button-red1, $button-red2);
+    border-radius: 50%;
+    box-shadow: 1px 1px 3px 2px lightgray;
+    border:none;
+    padding: 10px 12px;
+    transition: 2s;
+    cursor: pointer;
+    color: white;
+    margin: 5px;
+}
+
+a {
+    text-decoration: none;
+}
+
+.eye-button{
+
+}
+
+.closed-eye-button, .open-eye-button {
+    background: -webkit-linear-gradient($button-blue1, $button-blue2);
+    border-radius: 50%;
+    box-shadow: 1px 1px 3px 2px lightgray;
+    border:none;
+    padding: 7px 12px;
+    margin-left: 100px;
+    position: fixed;
+    bottom: 30px;
+    right: 420px;
+    transition: 2s;
+    cursor: pointer;
+    z-index:1000;
+}
+
+.open-eye-button-discard {
+    background: -webkit-linear-gradient($button-blue1, $button-blue2);
+    border-radius: 50%;
+    box-shadow: 1px 1px 3px 2px lightgray;
+    border:none;
+    padding: 7px 12px;
+    cursor: pointer;
+    margin: 5px;
+    color:white;
+}
+
+.fa-eye, .fa-eye-slash {
+    color: white;
+}
+
+.notes {
+    font-family: 'Shadows Into Light', cursive;
+}
+
+
 
 .fa-arrow-up {
     color: white;
@@ -174,6 +231,8 @@ body {
 
 
 .pile-personal-discard{
+    align-items: center;
+    justify-content: center;
     position: fixed;
     bottom: 20px;
     left:20px;

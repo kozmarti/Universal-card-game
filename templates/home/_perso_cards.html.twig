@@ -1,5 +1,5 @@
 <div class="card-container my-cards">
-    <h3> {{ app.user.username }} </h3>
+
 
     <div class="cards-in-my-hands">
         {% for c in cards %}
@@ -17,28 +17,70 @@
                 {% endif %}
             {% endif %}
         {% endfor %}
+    </div>
+        {% if my_card_in_hands > 0 %}
+        <div class="eye-button">
+            {% if my_card_on_table > 0 %}
+                <div>
+                    <form action="{{ path("discard_my_showed_cards") }}" method="post">
+                        <input type="hidden" name="cards-to-discard">
+                        <button title="Discard in global deck" class="discard-global" type="submit"><i class="fas fa-trash-alt"></i><i class="fas fa-users"></i></button>
+                    </form>
+                    <form action="{{ path("discard_my_showed_cards_in_personal_discard") }}" method="post">
+                        <input type="hidden" name="cards-to-discard">
+                        <button title="Discard in personal deck" class="discard-personal"  type="submit"><i class="fas fa-trash-alt"></i> <i class="fas fa-user"></i></button>
+                    </form>
+                </div>
+            {% endif %}
 
         <form action="{{ path("show_my_cards") }}" method="post">
             <input type="hidden" name="card-to-play" >
-            <button type="submit">SHOW SHOW SHOW SHOW </button>
+            <button   title="Show my cards"  class="closed-eye-button" type="submit"><i class="fas fa-eye-slash"></i></button>
         </form>
+        </div>
+        {% endif %}
 
-    </div>
+        {% if my_card_on_table > 0 %}
+        <div class="eye-button">
+            {% if my_card_on_table > 0 %}
+                <div>
+                    <form action="{{ path("discard_my_showed_cards") }}" method="post">
+                        <input type="hidden" name="cards-to-discard">
+                        <button title="Discard in global deck" class="discard-global" type="submit"><i class="fas fa-trash-alt"></i><i class="fas fa-users"></i></button>
+                    </form>
+                    <form action="{{ path("discard_my_showed_cards_in_personal_discard") }}" method="post">
+                        <input type="hidden" name="cards-to-discard">
+                        <button title="Discard in personal deck" class="discard-personal"  type="submit"><i class="fas fa-trash-alt"></i> <i class="fas fa-user"></i></button>
+                    </form>
+                </div>
+            {% endif %}
+
+
+        <form action="{{ path("take_back_my_cards") }}" method="post">
+            <input type="hidden" name="card-to-play" >
+            <button title="Take back my cards" class="open-eye-button" type="submit"><i class="far fa-eye"></i></button>
+        </form>
+        </div>
+
+        {% endif %}
+
 
     {% if count_personal_discard > 0 %}
-    <div class="pile-personal-discard">
+    <div class="pile-personal-discard d-flex">
        <div class="hidden-card-background">
             <img class="hidden-card" src="" alt="">
         </div>
+<div>
         <form action="{{ path("show_one_discarded_personal_card") }}" method="post">
             <input type="hidden" name="card-to-show">
-            <button type="submit">Show Discarded Card</button>
+            <button class="open-eye-button-discard" type="submit"><i class="far fa-eye"></i> All </button>
         </form>
         <form action="{{ path("show_last_discarded_personal_card") }}" method="post">
             <input type="hidden" name="card-to-show">
-            <button type="submit">Show Last Discarded Card</button>
+            <button class="open-eye-button-discard" type="submit"><i class="fas fa-arrow-right"></i> </button>
         </form>
-    </div>
+</div>
+</div>
     {% endif %}
 
     <div class="my-cards-on-table">
@@ -46,23 +88,13 @@
         {% for c in cards %}
             {%  if c.user %}
                 {%  if c.user.id == app.user.id and c.isVisible == 1 %}
-                    <div class="">
+                    <div class="card-to-gliss">
                         <img class="visible-card" src="{{ c.image }}" alt="">
                     </div>
                 {% endif %}
             {% endif %}
         {% endfor %}
-        <div>
-        <form action="{{ path("discard_my_showed_cards") }}" method="post">
-            <input type="hidden" name="cards-to-discard">
-            <button type="submit">Discard my cards to global</button>
-        </form>
-        <form action="{{ path("discard_my_showed_cards_in_personal_discard") }}" method="post">
-            <input type="hidden" name="cards-to-discard">
-            <button type="submit">Discard my cards to personal</button>
-        </form>
-        </div>
+
+
     </div>
-
-
 </div>
