@@ -36,6 +36,7 @@ class UserFixtures extends Fixture
 
         $user3 = new User();
         $user3->setUsername('marta');
+        $user3->setRoles(['ROLE_ADMIN']);
         $user3->setPassword($this->passwordEncoder->encodePassword(
             $user3,
             'password'
