@@ -1,5 +1,5 @@
 @import "~bootstrap/scss/bootstrap";
-
+@import "table-center";
 body {
     background: repeat url("../images/tapis.jpg");
 }
@@ -21,15 +21,16 @@ body {
     opacity: 0;
     width:150px;
     height: 200px;
+
 }
 
 .hidden-card-background{
     margin: 5px;
     width:150px;
-    height: 200px;
-    background-color: #999999;
     border: 1px solid black;
     border-radius: 10px;
+    background-image: url("../images/cardback.png");
+    background-size: cover;
 }
 
 .card-container {
