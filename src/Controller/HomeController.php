@@ -23,6 +23,15 @@ use Knp\Bundle\MarkdownBundle\MarkdownParserInterface;
 
 class HomeController extends AbstractController
 {
+
+    private $entityManager;
+
+    public function __construct(EntityManagerInterface $entityManager)
+    {
+        $this->entityManager = $entityManager;
+    }
+
+
     /**
      * @Route("/home", name="index")
      */
@@ -59,14 +68,14 @@ class HomeController extends AbstractController
             'users' => $users,
             'count_cards_in_deck' => count($deckCards),
             'decks' => $deckCards,
-            'last_played_card' => $lastPlayedCard,
-
             'html' =>$html
-
+            'users' =>$users,
+            'last_played_card' => $lastPlayedCard,
         ]);
     }
 
     /**
+
      * @Route("/note", name="note")
      */
 
@@ -83,6 +92,58 @@ class HomeController extends AbstractController
         return $this->json($zone, 200);
 
     }
+
+
+
+     * @Route("/newgame", name="new_game")
+     */
+    public function newGame(CardRepository $cardRepository, ZoneRepository $zoneRepository,UserRepository $userRepository, Request $request, EntityManagerInterface $entityManager): Response
+
+    {
+        $zone = $zoneRepository->findOneBy([]);
+        $form = $this->createForm(ZoneType::class, $zone);
+        $form->handleRequest($request);
+        $players=$userRepository->findAll();
+        $deckCards=$cardRepository->findBy(['isInDeck' => true]);
+        $lastPlayedCard=$cardRepository->findLastPlayedCard();
+        $users = $userRepository->findAll();
+
+        if ($form->isSubmitted() && $form->isValid()) {
+            $entityManager->persist($zone);
+            $entityManager->flush();
+            return $this->json($zone, 200);
+        }
+
+        $zones = $zoneRepository->findAll();
+        foreach ($zones as $zone) {
+            $zone->setInformation(null);
+            $this->entityManager->persist($zone);
+        }
+        $cards = $cardRepository->findAll();
+        foreach ($cards as $card) {
+            $card->setUser(null);
+            $card->setUserDiscard(null);
+            $card->setUser(null);
+            $card->setIsPlayed(0);
+            $card->setIsVisible(0);
+            $card->setIsInDeck(1);
+            $this->entityManager->persist($card);
+        }
+
+        $this->entityManager->flush();
+
+        return $this->render('home/game.html.twig', [
+            'cards' => $cardRepository->findAll(),
+            'players' =>$players,
+            'count_cards_in_deck' => count($deckCards),
+            'decks' => $deckCards,
+            'users' =>$users,
+            'last_played_card' => $lastPlayedCard,
+            'zoneForm' => $form->createView(),
+        ]);
+    }
+
+
 
 
 
