@@ -58,7 +58,10 @@
             <input type="hidden" name="cards-to-discard">
             <button type="submit">Discard my cards to global</button>
         </form>
-
+        <form action="{{ path("discard_my_showed_cards_in_personal_discard") }}" method="post">
+            <input type="hidden" name="cards-to-discard">
+            <button type="submit">Discard my cards to personal</button>
+        </form>
     </div>
 
 
