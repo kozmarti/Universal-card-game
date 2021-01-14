@@ -230,12 +230,15 @@ class DistributionController extends AbstractController
      */
     public function showDiscardedPersonalCard(Request $request,CardRepository $cardRepository): Response
     {
-        $cardToShow = $request->request->all();
-        $card = $cardRepository->find($cardToShow['card-to-show']);
-        $card->setIsVisible(1);
-        $card->setUser($this->getUser());
-        $card->setUserDiscard(null);
-        $this->entityManager->persist($card);
+
+        $cardDiscardPerso = $cardRepository->findBy(['userDiscard' => $this->getUser()]);
+        foreach ($cardDiscardPerso as $card) {
+            $card->setIsVisible(1);
+            $card->setUser($this->getUser());
+            $card->setUserDiscard(null);
+            $this->entityManager->persist($card);
+        }
+
         $this->entityManager->flush();
         return $this->redirectToRoute('game');
     }
