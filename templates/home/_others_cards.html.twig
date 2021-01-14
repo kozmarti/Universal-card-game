@@ -3,13 +3,15 @@
     {% for p in players %}
     <div class="other-players {{ p.username }}">
         {% if p.id != app.user.id %}
-            <h3>{{ p.username }}</h3>
+            <div class="other-players-name">
+                <h3>{{ p.username }}</h3>
+            </div>
             <div class="card-container">
                 <div>
-                    <h3>Cards in hands</h3>
                     {% for c in cards %}
                         {% if c.user %}
                             {% if c.user.id == p.id and c.isVisible == 0 %}
+                                <div class="card-to-gliss-horizontal">
                                 <div class="hidden-card-background">
                                     <img class="hidden-card" src="{{ c.image }}" alt="">
                                 </div>
@@ -17,6 +19,7 @@
                                     <input type="hidden" name="card-to-take" value="{{ c.id }}">
                                     <button type="submit">Take Card</button>
                                 </form>
+                                </div>
                             {% endif %}
                         {% endif %}
                     {% endfor %}
@@ -27,6 +30,7 @@
                     {% for c in cards %}
                         {% if c.user %}
                             {% if c.user.id == p.id and c.isVisible == 1 %}
+                    <div class="card-to-gliss-horizontal">
                                 <div class="hidden-card-background">
                                     <img class="visible-card" src="{{ c.image }}" alt="">
                                 </div>
@@ -34,6 +38,7 @@
                                     <input type="hidden" name="card-to-take" value="{{ c.id }}">
                                     <button type="submit">Take Card</button>
                                 </form>
+                    </div>
                             {% endif %}
                         {% endif %}
                     {% endfor %}
