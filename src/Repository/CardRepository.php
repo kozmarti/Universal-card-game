@@ -3,6 +3,7 @@
 namespace App\Repository;
 
 use App\Entity\Card;
+use App\Entity\User;
 use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
 use Doctrine\Persistence\ManagerRegistry;
 
@@ -31,6 +32,17 @@ class CardRepository extends ServiceEntityRepository
         ;
     }
 
+    public function findLastDiscardedCard(User $user)
+    {
+        return $this->createQueryBuilder('c')
+            ->andWhere('c.userDiscard = :val')
+            ->setParameter('val', $user)
+            ->orderBy('c.updatedAt', 'DESC')
+            ->setMaxResults(1)
+            ->getQuery()
+            ->getOneOrNullResult()
+            ;
+    }
 
     /*
     public function findOneBySomeField($value): ?Card

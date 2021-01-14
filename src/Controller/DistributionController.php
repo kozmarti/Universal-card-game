@@ -292,4 +292,21 @@ class DistributionController extends AbstractController
         return $this->redirectToRoute('game');
     }
 
+
+    /**
+     *  @Route("/showLastDiscardedPersonalCard", name="show_last_discarded_personal_card")
+     */
+    public function showLastDiscardedPersonalCard(CardRepository $cardRepository): Response
+    {
+        $user = $this->getUser();
+        $card = $cardRepository->findLastDiscardedCard($user);
+        if ($card) {
+            $card->setIsVisible(1);
+            $card->setUser(null);
+            $card->setUserDiscard(null);
+            $this->entityManager->persist($card);
+            $this->entityManager->flush();
+        }
+        return $this->redirectToRoute('game');
+    }
 }
