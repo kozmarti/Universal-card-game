@@ -226,14 +226,14 @@ class DistributionController extends AbstractController
 
 
     /**
-     *  @Route("/showDiscardedPersonalCard", name="show_discarded_personal_card")
+     *  @Route("/showOneDiscardedPersonalCard", name="show_one_discarded_personal_card")
      */
-    public function showDiscardedPersonalCard(Request $request,CardRepository $cardRepository): Response
+    public function showOneDiscardedPersonalCard(CardRepository $cardRepository): Response
     {
-        $cardToShow = $request->request->all();
-        $card = $cardRepository->find($cardToShow['card-to-show']);
+
+        $card = $cardRepository->findLastPlayedCard();
         $card->setIsVisible(1);
-        $card->setUser($this->getUser());
+        $card->setUser(null);
         $card->setUserDiscard(null);
         $this->entityManager->persist($card);
         $this->entityManager->flush();
