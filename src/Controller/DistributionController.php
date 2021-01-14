@@ -121,6 +121,7 @@ class DistributionController extends AbstractController
         $randCardsId = array_rand(array_flip($cardIds));
         $card = $cardRepository->find($randCardsId);
         $card->setIsPlayed(1);
+        $card->setIsVisible(1);
         $card->setIsInDeck(0);
         $this->entityManager->persist($card);
         $this->entityManager->flush();
@@ -128,6 +129,46 @@ class DistributionController extends AbstractController
 
         return $this->redirectToRoute('game');
     }
+
+
+    /**
+     * @Route("/putbackdiscerded", name="put_back_discarded")
+     */
+    public function putBackDiscarded(UserRepository $userRepository, CardRepository $cardRepository): Response
+    {
+        $cardsDiscardDeck = $cardRepository->findBy(['isDiscard' => 1]);
+        foreach ($cardsDiscardDeck as $card) {
+            $card->setIsPlayed(0);
+            $card->setIsVisible(0);
+            $card->setIsDiscard(0);
+            $card->setIsInDeck(1);
+            $card->setUserDiscard(null);
+            $card->setUser(null);
+            $this->entityManager->persist($card);
+        }
+
+
+        $this->entityManager->flush();
+
+
+        return $this->redirectToRoute('game');
+    }
+
+
+    /**
+     * @Route("/showmycards", name="show_my_cards")
+     */
+    public function showMyCards(UserRepository $userRepository, CardRepository $cardRepository): Response
+    {
+        $cardsInHand = $cardRepository->findBy(['user' => $this->getUser()]);
+        foreach ($cardsInHand as $card) {
+            $card->setIsVisible(1);
+            $this->entityManager->persist($card);
+        }
+        $this->entityManager->flush();
+        return $this->redirectToRoute('game');
+    }
+
 
     /**
      *  @Route("/discardCardsPersonal", name="discard_cards_personal")
