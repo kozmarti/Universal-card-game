@@ -128,18 +128,19 @@ class DistributionController extends AbstractController
     }
 
     /**
-     *  * @Route("/discardCardPersonal", name="discard_card_personal")
+     *  * @Route("/discardCardsPersonal", name="discard_cards_personal")
      */
-    public function discardCardPersonal(Request $request,CardRepository $cardRepository): Response
+    public function discardCardsPersonal(CardRepository $cardRepository): Response
     {
-        $userId = $this->getUser();
-        $cardToDiscard = $request->request->all();
-        $card = $cardRepository->find($cardToDiscard['card-to-discard']);
-        $card->setUserDiscard($userId);
-        $card->setUser(null);
-        $card->setIsVisible(0);
-        $card->setIsPlayed(0);
-        $this->entityManager->persist($card);
+        $user = $this->getUser();
+        $visibleCards = $cardRepository->findBy(['isVisible' => 1]);
+        foreach ($visibleCards as $visibleCard) {
+            $visibleCard->setUserDiscard($user);
+            $visibleCard->setIsVisible(0);
+            $visibleCard->setIsPlayed(0);
+            $this->entityManager->persist($visibleCard);
+        }
+
         $this->entityManager->flush();
         return $this->redirectToRoute('game');
     }
@@ -179,6 +180,23 @@ class DistributionController extends AbstractController
         $this->entityManager->flush();
         return $this->redirectToRoute('game');
     }
+
+    /**
+     *  * @Route("/showDiscardedPersonalCard", name="show_discarded_personal_card")
+     */
+    public function showDiscardedPersonalCard(Request $request,CardRepository $cardRepository): Response
+    {
+        $cardToShow = $request->request->all();
+        $card = $cardRepository->find($cardToShow['card-to-show']);
+        $card->setIsVisible(1);
+        $card->setUserDiscard(null);
+        $this->entityManager->persist($card);
+        $this->entityManager->flush();
+        return $this->redirectToRoute('game');
+    }
+
+
+
 
 
 
