@@ -32,8 +32,13 @@
         </div>
 
         <form action="{{ path("show_one_discarded_personal_card") }}" method="post">
-            <input type="hidden" name="card-to-show" value="">
+            <input type="hidden" name="card-to-show">
             <button type="submit">Show Discarded Card</button>
+        </form>
+
+        <form action="{{ path("show_last_discarded_personal_card") }}" method="post">
+            <input type="hidden" name="card-to-show">
+            <button type="submit">Show Last Discarded Card</button>
         </form>
     </div>
 
