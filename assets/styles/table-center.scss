@@ -21,9 +21,24 @@
   }
 
   display: flex;
+  flex-direction: row-reverse;
   justify-content: center;
   position: absolute;
   right: 0px;
+  max-width: 300px;
+
+}
+
+
+.marta {
+  .hidden-card-background {
+    transform: rotate(90deg);
+  }
+
+  display: flex;
+  justify-content: center;
+  position: absolute;
+  left: 0px;
   max-width: 300px;
 
 }
@@ -35,4 +50,6 @@
 
 .other-players-name {
   align-self:center;
+  padding:30px;
 }
+
