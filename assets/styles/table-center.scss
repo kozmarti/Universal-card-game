@@ -4,19 +4,25 @@
   height: 200px;
 }
 
-.marta {
+.vlad {
+  .hidden-card-background{
+    transform: rotate(90deg);
+  }
   display : flex;
   justify-content: center;
   position:absolute;
   left:0px;
-
-
+  max-width:300px;
 }
 
 .mathias {
+  .hidden-card-background{
+    transform: rotate(90deg);
+  }
   display : flex;
   justify-content: center;
   position:absolute;
   right:0px;
+  max-width:300px;
 
 }
