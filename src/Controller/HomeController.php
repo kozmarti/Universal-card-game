@@ -54,10 +54,9 @@ class HomeController extends AbstractController
     public function game(MarkdownParserInterface $parser,CardRepository $cardRepository, ZoneRepository $zoneRepository,UserRepository $userRepository, Request $request, EntityManagerInterface $entityManager): Response
 
     {
-
-
         $players=$userRepository->findAll();
         $deckCards=$cardRepository->findBy(['isInDeck' => true]);
+        $deckDiscardCards=$cardRepository->findBy(['isDiscard' => true]);
         $lastPlayedCard=$cardRepository->findLastPlayedCard();
         $users = $userRepository->findAll();
 
@@ -67,6 +66,7 @@ class HomeController extends AbstractController
             'players' =>$players,
             'users' => $users,
             'count_cards_in_deck' => count($deckCards),
+            'count_cards_in_discard_deck' => count($deckDiscardCards),
             'decks' => $deckCards,
             'html' =>$html,
             'last_played_card' => $lastPlayedCard,
