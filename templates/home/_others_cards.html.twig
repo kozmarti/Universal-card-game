@@ -4,6 +4,8 @@
         {%  if p.id != app.user.id %}
             <h3>{{ p.username }}</h3>
             <div class="card-container">
+
+                <h3>Cards in hands</h3>
                 {% for c in cards %}
                     {%  if c.user %}
                         {%  if c.user.id == p.id %}
@@ -17,16 +19,14 @@
                         {% endif %}
                     {% endif %}
                 {% endfor %}
-                {% for c in cards %}
-                    {%  if c.userDiscard %}
-                        {%  if c.userDiscard.id == p.id %}
+<div>
+                <h3>Cards in personal discard</h3>
+
                             <div class="hidden-card-background">
-                                <img class="hidden-card" src="{{ c.image }}" alt="">
+                                <img class="hidden-card" src="" alt="">
                             </div>
-                            {{ loop.index }}
-                        {% endif %}
-                    {% endif %}
-                {% endfor %}
+
+</div>
             </div>
         {% endif %}
     {% endfor %}
