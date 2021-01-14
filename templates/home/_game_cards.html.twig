@@ -12,12 +12,15 @@
         {% for c in cards %}
 
             {%  if c.user %}
-            {%  if c.user.id == p.id %}
-                <div class="hidden-card-background">
-            <img class="hidden-card" src="{{ c.image }}" alt="">
-                </div>
-
-            {% endif %}
+                {%  if c.user.id == p.id %}
+                    <div class="hidden-card-background">
+                        <img class="hidden-card" src="{{ c.image }}" alt="">
+                    </div>
+                    <form action="{{ path("take_card") }}" method="post">
+                        <input type="hidden" name="card-to-take" value="{{ c.id }}">
+                        <button type="submit">Take Card</button>
+                    </form>
+                {% endif %}
             {% endif %}
 
         {% endfor %}
@@ -52,15 +55,12 @@
                     <button type="submit">PLAY</button>
                 </form>
                 <form action="{{ path("discard_card_personal") }}" method="post">
-
                     <input type="hidden" name="card-to-play" value="{{ c.id }}">
                     <button type="submit">DISCARD</button>
                 </form>
             {% endif %}
         {% endif %}
-
     {% endfor %}
-    
     {% for c in cards %}
         {%  if c.userDiscard %}
             {%  if c.userDiscard.id == app.user.id %}
@@ -71,17 +71,10 @@
                     <input type="hidden" name="card-to-take" value="{{ c.id }}">
                     <button type="submit">Take Card</button>
                 </form>
-
                 {{ loop.index }}
             {% endif %}
         {% endif %}
     {% endfor %}
-
-
-  {% include '/home/_game-distrib-one-card.html.twig' %}
-
-
-
 </div>
 {% include '/home/_game-distrib-one-card.html.twig' %}
 
