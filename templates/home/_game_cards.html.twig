@@ -47,7 +47,7 @@
 <div class="card-container">
     <h3> Visible cards on table </h3>
     {% for c in cards %}
-        {%  if c.isVisible %}
+        {%  if c.isVisible and not c.user %}
             <img src="{{ c.image }}" alt="">
             <form action="{{ path("take_card") }}" method="post">
                 <input type="hidden" name="card-to-take" value="{{ c.id }}">
