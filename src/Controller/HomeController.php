@@ -137,6 +137,7 @@ class HomeController extends AbstractController
             $card->setIsPlayed(0);
             $card->setIsVisible(0);
             $card->setIsInDeck(1);
+            $card->setIsDiscard(0);
             $this->entityManager->persist($card);
         }
 
