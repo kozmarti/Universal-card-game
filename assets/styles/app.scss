@@ -1,5 +1,7 @@
 @import "~bootstrap/scss/bootstrap";
 @import "table-center";
+@import "variable";
+
 body {
     background: repeat url("../images/tapis.jpg");
 }
@@ -72,9 +74,53 @@ body {
     display:flex;
     justify-content: center;
     align-items: center;
-
 }
 
 .card-to-gliss{
-    width: 100px;
+    width: 120px;
 }
+
+.green-button {
+    background: -webkit-linear-gradient($button-green1, $button-green2);
+    border-radius: 50%;
+    box-shadow: 1px 1px 3px 2px lightgray;
+    border:none;
+    padding: 4px 12px;
+    margin-left: 100px;
+    display:none;
+    position: absolute;
+    top: 30px;
+    transition: 2s;
+    cursor: pointer;
+}
+
+.fa-arrow-up {
+    color: white;
+
+}
+
+
+.my-visible-card-in-hand {
+    padding-top: 80px;
+    transition: 0.3s;
+    &:hover{
+        padding-top: 0;
+
+    }
+}
+
+.card-to-gliss{
+    position: relative;
+
+}
+
+.card-to-gliss:hover {
+    transition: 2s;
+}
+
+.card-to-gliss:hover .green-button {
+    display: inline;
+    position: absolute;
+    top: 30px;
+}
+
