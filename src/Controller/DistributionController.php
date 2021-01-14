@@ -189,6 +189,7 @@ class DistributionController extends AbstractController
         $cardToShow = $request->request->all();
         $card = $cardRepository->find($cardToShow['card-to-show']);
         $card->setIsVisible(1);
+        $card->setUser($this->getUser());
         $card->setUserDiscard(null);
         $this->entityManager->persist($card);
         $this->entityManager->flush();
