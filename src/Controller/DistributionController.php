@@ -67,7 +67,7 @@ class DistributionController extends AbstractController
     }
 
     /**
-     * @Route("/distribute/discard", name="distribute")
+     * @Route("/distribute/discard", name="distribute_discard")
      */
     public function distributeInPersoDiscard(UserRepository $userRepository, Request $request, CardRepository $cardRepository): Response
     {
@@ -84,7 +84,7 @@ class DistributionController extends AbstractController
                 unset($cardIds[$key]);
                 $card = $cardRepository->find($randCardsId);
                 $user = $userRepository->find($userId);
-                $card->setUserDiscard($userId);
+                $card->setUserDiscard($user);
                 $card->setIsInDeck(0);
                 $this->entityManager->persist($card);
             }

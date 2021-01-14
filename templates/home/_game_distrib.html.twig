@@ -13,11 +13,11 @@
         </button>
     </form>
 
-    <form class="" action="{{ path("distribute") }}" method="post">
+    <form action="{{ path("distribute_discard") }}" method="post">
         {% for user in users %}
             <ul>
                 <li>
-                    {{ user.username }} - <input type="number" name="{{ user.id }}" value="">
+                    {{ user.username }} - <input type="number" name="{{ user.id }}">
                 </li>
             </ul>
         {% endfor %}
