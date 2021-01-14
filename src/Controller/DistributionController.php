@@ -42,12 +42,14 @@ class DistributionController extends AbstractController
     public function distribute(UserRepository $userRepository, Request $request, CardRepository $cardRepository): Response
     {
         $distributionNumbers = $request->request->all();
+
         $cardsInDeck = $cardRepository->findBy(['isInDeck' => 1]);
         foreach ($cardsInDeck as $cardInDeck) {
             $cardIds[] = $cardInDeck->getId();
         }
 
         foreach ($distributionNumbers as $userId => $distributionNumber) {
+            if ($distributionNumber){
             for ($i = 1; $i < $distributionNumber + 1; $i++) {
                 $randCardsId = array_rand(array_flip($cardIds));
                 $key = array_search($randCardsId, $cardIds);
@@ -57,6 +59,7 @@ class DistributionController extends AbstractController
                 $card->setUser($user);
                 $card->setIsInDeck(0);
                 $this->entityManager->persist($card);
+            }
             }
         }
 
@@ -78,15 +81,17 @@ class DistributionController extends AbstractController
         }
 
         foreach ($distributionNumbers as $userId => $distributionNumber) {
-            for ($i = 1; $i < $distributionNumber + 1; $i++) {
-                $randCardsId = array_rand(array_flip($cardIds));
-                $key = array_search($randCardsId, $cardIds);
-                unset($cardIds[$key]);
-                $card = $cardRepository->find($randCardsId);
-                $user = $userRepository->find($userId);
-                $card->setUserDiscard($user);
-                $card->setIsInDeck(0);
-                $this->entityManager->persist($card);
+            if ($distributionNumber) {
+                for ($i = 1; $i < $distributionNumber + 1; $i++) {
+                    $randCardsId = array_rand(array_flip($cardIds));
+                    $key = array_search($randCardsId, $cardIds);
+                    unset($cardIds[$key]);
+                    $card = $cardRepository->find($randCardsId);
+                    $user = $userRepository->find($userId);
+                    $card->setUserDiscard($user);
+                    $card->setIsInDeck(0);
+                    $this->entityManager->persist($card);
+                }
             }
         }
 
