@@ -7,25 +7,27 @@
                 <h3>{{ p.username }}</h3>
             </div>
             <div class="card-container">
-                <div>
+
                     {% for c in cards %}
                         {% if c.user %}
                             {% if c.user.id == p.id and c.isVisible == 0 %}
-                                <div class="card-to-gliss-horizontal">
-                                <div class="hidden-card-background">
-                                    <img class="hidden-card other-players-card" src="{{ c.image }}" alt="">
-                                </div>
-                                <form action="{{ path("take_card") }}" method="post">
-                                    <input type="hidden" name="card-to-take" value="{{ c.id }}">
-                                    <button class="green-button" title="Play card" type="submit"><i class="far fa-circle" aria-hidden="true"></i>
-                                    </button>
 
-                                </form>
+                                <div class="card-to-gliss-horizontal">
+                                    <div class="hidden-card-background card-horizontal">
+                                        <img class="hidden-card other-players-card" src="{{ c.image }}" alt="">
+                                        <form class="" action="{{ path("take_card") }}" method="post">
+                                            <input type="hidden" name="card-to-take" value="{{ c.id }}">
+                                            <button class="take-button " title="Take card" type="submit"><i
+                                                        class="far fa-circle" aria-hidden="true"></i>
+                                            </button>
+                                        </form>
+                                    </div>
                                 </div>
+
                             {% endif %}
                         {% endif %}
                     {% endfor %}
-                </div>
+
 
                 <div>
                     {% for c in cards %}

@@ -165,8 +165,12 @@ body {
 
 
 .card-to-gliss-horizontal {
+    position:relative;
+    display:flex;
+    align-items: center;
     height:40px;
 }
+
 
 
 .pile-personal-discard{
@@ -179,4 +183,5 @@ body {
     display:flex;
     z-index: 0 !important;
 }
+
 
