@@ -1,9 +1,16 @@
 @import "~bootstrap/scss/bootstrap";
 @import "table-center";
+
 @import "variable";
+
+@import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@300&display=swap');
+
 
 body {
     background: repeat url("../images/tapis.jpg");
+    color:white;
+    font-family: 'Montserrat', sans-serif;
+
 }
 
 /*
@@ -16,14 +23,18 @@ body {
 } */
 
 .navbar {
-    background-color: #999999;
+    background: rgb(2,0,36);
+    background: linear-gradient(180deg, rgba(2,0,36,1) 0%, rgba(30,21,42,1) 42%, rgba(21,33,16,1) 100%);
+    text-decoration: none;
+    a {
+        color:white;
+    }
 }
 
 .hidden-card {
     opacity: 0;
     width:150px;
     height: 200px;
-
 }
 
 .hidden-card-background{
@@ -111,7 +122,6 @@ body {
 
 .card-to-gliss{
     position: relative;
-
 }
 
 .card-to-gliss:hover {
@@ -122,5 +132,11 @@ body {
     display: inline;
     position: absolute;
     top: 30px;
+}
+
+
+
+.card-to-gliss-horizontal {
+    height:40px;
 }
 
