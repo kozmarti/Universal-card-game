@@ -1,8 +1,3 @@
-<h1 class="section"> OTHER PLAYERS </h1>
-{% include '/home/_others_cards.html.twig' %}
-<h1 class="section"> MY CARDS </h1>
-{% include '/home/_perso_cards.html.twig' %}
-{% include '/home/_game-distrib-one-card.html.twig' %}
 
 
 <div class="container-fluid">
@@ -17,8 +12,9 @@
                 </div>
                 <form action="{{ path("play_deck_card") }}" method="post">
                     <input type="hidden" name="card-to-play" value="from-deck-to-play">
-                    <button type="submit">PLAY</button>
+                    <button type="submit">Play</button>
                 </form>
+                <a class="btn btn-dark" href="{{ path("distribute_one_card") }}">Take a card</a>
             </div>
         </div>
 
@@ -35,7 +31,9 @@
                             <form class="d-flex justify-content-center" action="{{ path("take_card") }}" method="post">
                                 <input type="hidden" name="card-to-take" value="{{ c.id }}">
                                 <button type="submit">Take Card</button>
+
                             </form>
+
                         </div>
 
                     {% endif %}
@@ -62,7 +60,7 @@
                     <img class="hidden-card" alt="">
                 </div>
 
-                <a class="btn btn-secondary" href="{{ path("put_back_discarded") }}">PUT ALL BACK TO DECK</a>
+                <a class="btn btn-secondary" href="{{ path("put_back_discarded") }}">Put all back to deck</a>
             </div>
 
         </div>

@@ -1,6 +1,7 @@
 
 <div class="other-players">
     {% for p in players %}
+
         {%  if p.id != app.user.id %}
             <h3>{{ p.username }}</h3>
             <div class="card-container">
