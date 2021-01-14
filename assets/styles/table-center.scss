@@ -28,6 +28,20 @@
 
 }
 
+
+.marta {
+  .hidden-card-background {
+    transform: rotate(90deg);
+  }
+
+  display: flex;
+  justify-content: center;
+  position: absolute;
+  left: 0px;
+  max-width: 300px;
+
+}
+
 .other-players {
   display:flex;
   justify-content:center;
