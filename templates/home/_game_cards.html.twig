@@ -13,59 +13,69 @@
 
 
 {% include '/home/_game-distrib-one-card.html.twig' %}
-
-
-<h1 class="section" > TABLE </h1>
-<div class="card-container">
-    <h3> In deck : {{ count_cards_in_deck}} </h3>
-    <div class="hidden-card-background">
-    <img class="hidden-card"  alt="">
+<div class="container-fluid">
+    <div class="row">
+        <div class="col">
+            <div class="card-container">
+                <h3> In deck : {{ count_cards_in_deck }} </h3>
+                <div class="hidden-card-background">
+                    <img class="hidden-card" alt="">
+                </div>
+                <form action="{{ path("play_deck_card") }}" method="post">
+                    <input type="hidden" name="card-to-play" value="from-deck-to-play">
+                    <button type="submit">PLAY</button>
+                </form>
+            </div>
+        </div>
+        <div class="col">
+            <div class="card-container">
+                <h3> Discarded deck : {{ count_cards_in_discard_deck }} </h3>
+                <div class="hidden-card-background">
+                    <img class="hidden-card" alt="">
+                </div>
+                <form action="{{ path("put_back_discarded") }}" method="post">
+                    <input type="hidden" name="card-to-play" value="from-deck-to-play">
+                    <button type="submit">PUT ALL BACK TO DECK</button>
+                </form>
+            </div>
+        </div>
     </div>
-    <form action="{{ path("play_deck_card") }}" method="post">
-        <input type="hidden" name="card-to-play" value="from-deck-to-play">
-        <button type="submit">PLAY</button>
-    </form>
-</div>
 
+    <div class="row">
+        <div class="col">
+            <div class="card-container">
+                <h3> Visible cards on table </h3>
+                {% for c in cards %}
+                    {% if c.isVisible and not c.user %}
+                        <img src="{{ c.image }}" alt="">
+                        <form action="{{ path("take_card") }}" method="post">
+                            <input type="hidden" name="card-to-take" value="{{ c.id }}">
+                            <button type="submit">Take Card</button>
+                        </form>
+                    {% endif %}
+                {% endfor %}
+                <a class="btn btn-danger" href="{{ path("discard_all_cards") }}">Discard into global</a>
+                <a class="btn btn-info" href="{{ path("discard_cards_personal") }}">Discard into my pile</a>
+            </div>
 
-
-
-<div class="card-container">
-    <h3> Discarded deck : {{ count_cards_in_discard_deck}} </h3>
-    <div class="hidden-card-background">
-        <img class="hidden-card"  alt="">
+            <div class="card-container">
+                <h3> Played cards </h3>
+                {% if last_played_card %}
+                    <img src="{{ last_played_card.image }}" alt="">
+                {% endif %}
+            </div>
+        </div>
     </div>
-    <form action="{{ path("put_back_discarded") }}" method="post">
-        <input type="hidden" name="card-to-play" value="from-deck-to-play">
-        <button type="submit">PUT ALL BACK TO DECK</button>
-    </form>
-</div>
 
 
 
 
-<div class="card-container">
-    <h3> Visible cards on table </h3>
-    {% for c in cards %}
-        {%  if c.isVisible and not c.user %}
-            <img src="{{ c.image }}" alt="">
-            <form action="{{ path("take_card") }}" method="post">
-                <input type="hidden" name="card-to-take" value="{{ c.id }}">
-                <button type="submit">Take Card</button>
-            </form>
 
 
-        {% endif %}
-    {% endfor %}
-    <a class="btn btn-danger" href="{{ path("discard_all_cards") }}">Discard into global</a>
-    <a class="btn btn-info" href="{{ path("discard_cards_personal") }}">Discard into my pile</a>
-</div>
 
-<div class="card-container">
-    <h3> Played cards </h3>
-    {%  if last_played_card %}
-       <img src="{{ last_played_card.image }}" alt="">
-    {% endif %}
+
+
+
 </div>
 
 
