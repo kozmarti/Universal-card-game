@@ -2,7 +2,6 @@
     <div class="col-8">
         <img class="fond" src="{{ asset("build/cards.jpeg") }}" alt="dds">
     </div>
-
 </div>
 {% for p in players %}
     {%  if p.id != app.user.id %}
@@ -89,8 +88,6 @@
             {% endif %}
         {% endif %}
     {% endfor %}
-
-
 
 </div>
 {% include '/home/_game-distrib-one-card.html.twig' %}
