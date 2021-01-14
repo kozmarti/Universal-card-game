@@ -16,13 +16,23 @@
 }
 
 .mathias {
-  .hidden-card-background{
+  .hidden-card-background {
     transform: rotate(90deg);
   }
-  display : flex;
-  justify-content: center;
-  position:absolute;
-  right:0px;
-  max-width:300px;
 
+  display: flex;
+  justify-content: center;
+  position: absolute;
+  right: 0px;
+  max-width: 300px;
+
+}
+
+.other-players {
+  display:flex;
+  justify-content:center;
+}
+
+.other-players-name {
+  align-self:center;
 }
