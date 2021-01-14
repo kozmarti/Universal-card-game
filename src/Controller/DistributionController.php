@@ -30,7 +30,7 @@ class DistributionController extends AbstractController
 
         $users = $userRepository->findAll();
 
-        return $this->render('home/_game_distrib.html.twig', [
+        return $this->render('home/_game_distrib_hand.html.twig', [
             'users' => $users,
 
         ]);

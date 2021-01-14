@@ -1,0 +1,30 @@
+<div class="modal fade" id="hand" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="exampleModalLabel">Distribute to hand</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                <form class="form" action="{{ path("distribute") }}" method="post">
+                    {% for user in users %}
+                        <ul>
+                            <li>
+                                {{ user.username }} - <input type="number" name="{{ user.id }}" value="">
+                            </li>
+                        </ul>
+                    {% endfor %}
+                    <button type="submit" class="btn btn-success">
+                        Distribute to hands
+                    </button>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+
+
