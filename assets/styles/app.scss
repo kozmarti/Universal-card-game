@@ -3,6 +3,7 @@
 
 body {
     background: repeat url("../images/tapis.jpg");
+    color:white;
 }
 
 /*
@@ -15,14 +16,17 @@ body {
 } */
 
 .navbar {
-    background-color: #999999;
+    background-color: #1E152A;
+    text-decoration: none;
+    a {
+        color:white;
+    }
 }
 
 .hidden-card {
     opacity: 0;
     width:150px;
     height: 200px;
-
 }
 
 .hidden-card-background{
