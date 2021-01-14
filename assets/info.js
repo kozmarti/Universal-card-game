@@ -3,13 +3,17 @@ let textShow = document.getElementById('text-show');
 
 
 infoText.addEventListener('input', event => {
-    console.log('EVENT');
     fetch('/note?text-to-update=' + event.target.value)
         .then( res=>res.json())
         .then( json => autocomplete(json))
 
 })
 
+setInterval(function(){
+    fetch('/shownote')
+        .then( res=>res.json())
+        .then( json => autocomplete(json))
+}, 3000);
 
 function removeAllChildNodes(parent) {
     while (parent.firstChild) {

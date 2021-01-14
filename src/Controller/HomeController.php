@@ -95,9 +95,8 @@ class HomeController extends AbstractController
      */
     public function noteShow(ZoneRepository $zoneRepository)
     {
-         $zone = $zoneRepository->findOneBy(['id' =>1]);
-         $text=nl2br( $zone->getInformation());
-         dd($text);
+        $zone = $zoneRepository->findOneBy(['id' =>1]);
+        return $this->json($zone, 200);
 
     }
 
@@ -110,14 +109,12 @@ class HomeController extends AbstractController
     public function newGame(CardRepository $cardRepository,UserRepository $userRepository, Request $request, EntityManagerInterface $entityManager): Response
 
     {
-
         $players=$userRepository->findAll();
         $lastPlayedCard=$cardRepository->findLastPlayedCard();
         $users = $userRepository->findAll();
         $deckCards=$cardRepository->findBy(['isInDeck' => true]);
         $deckDiscardCards=$cardRepository->findBy(['isDiscard' => true]);
 
-        
         $cards = $cardRepository->findAll();
         foreach ($cards as $card) {
             $card->setUser(null);
@@ -129,14 +126,8 @@ class HomeController extends AbstractController
             $card->setIsDiscard(0);
             $this->entityManager->persist($card);
         }
-
         $this->entityManager->flush();
-
        return $this->redirectToRoute('game');
     }
-
-
-
-
 
 }

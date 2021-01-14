@@ -1,6 +1,6 @@
 <div class="card-container my-cards">
     <h3> {{ app.user.username }} </h3>
-    <div>
+    <div class="cards-in-my-hands">
         {% for c in cards %}
             {%  if c.user %}
 
@@ -14,14 +14,14 @@
                 {% endif %}
             {% endif %}
         {% endfor %}
-        <br>
+    </div>
 
         <h3>I show my cards to others</h3>
         <form action="{{ path("show_my_cards") }}" method="post">
             <input type="hidden" name="card-to-play" >
             <button type="submit">SHOW</button>
         </form>
-    </div>
+
 
 
     <div>
