@@ -117,9 +117,7 @@ class HomeController extends AbstractController
         $deckCards=$cardRepository->findBy(['isInDeck' => true]);
         $deckDiscardCards=$cardRepository->findBy(['isDiscard' => true]);
 
-
-
-
+        
         $cards = $cardRepository->findAll();
         foreach ($cards as $card) {
             $card->setUser(null);
@@ -134,15 +132,7 @@ class HomeController extends AbstractController
 
         $this->entityManager->flush();
 
-        return $this->render('home/game.html.twig', [
-            'cards' => $cardRepository->findAll(),
-            'players' =>$players,
-            'decks' => $deckCards,
-            'users' =>$users,
-            'last_played_card' => $lastPlayedCard,
-            'count_cards_in_deck' => count($deckCards),
-            'count_cards_in_discard_deck' => count($deckDiscardCards),
-        ]);
+       return $this->redirectToRoute('game');
     }
 
 
