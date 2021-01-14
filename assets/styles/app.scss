@@ -65,3 +65,21 @@ body {
 .section {
     margin: 100px;
 }
+
+.visible-card {
+    filter: sepia(15%);
+}
+
+
+.cards-in-my-hands{
+    position: fixed;
+    bottom: -20px;
+    display:flex;
+    justify-content: center;
+    align-items: center;
+
+}
+
+.card-to-gliss{
+    width: 100px;
+}
