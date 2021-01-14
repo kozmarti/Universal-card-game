@@ -5,7 +5,7 @@
             {%  if c.user %}
 
                 {%  if c.user.id == app.user.id and c.isVisible == 0 %}
-                    <img src="{{ c.image }}" alt="">
+                    <img class="visible-card my-visible-card" src="{{ c.image }}" alt="">
 
                     <form action="{{ path("play_card") }}" method="post">
                         <input type="hidden" name="card-to-play" value="{{ c.id }}">
@@ -49,7 +49,7 @@
             {%  if c.user %}
                 {%  if c.user.id == app.user.id and c.isVisible == 1 %}
                     <div class="hidden-card-background">
-                        <img src="{{ c.image }}" alt="">
+                        <img class="visible-card my-visible-card" src="{{ c.image }}" alt="">
                     </div>
                 {% endif %}
             {% endif %}
@@ -58,7 +58,10 @@
             <input type="hidden" name="cards-to-discard">
             <button type="submit">Discard my cards to global</button>
         </form>
-
+        <form action="{{ path("discard_my_showed_cards_in_personal_discard") }}" method="post">
+            <input type="hidden" name="cards-to-discard">
+            <button type="submit">Discard my cards to personal</button>
+        </form>
     </div>
 
 

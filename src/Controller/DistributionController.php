@@ -42,12 +42,14 @@ class DistributionController extends AbstractController
     public function distribute(UserRepository $userRepository, Request $request, CardRepository $cardRepository): Response
     {
         $distributionNumbers = $request->request->all();
+
         $cardsInDeck = $cardRepository->findBy(['isInDeck' => 1]);
         foreach ($cardsInDeck as $cardInDeck) {
             $cardIds[] = $cardInDeck->getId();
         }
 
         foreach ($distributionNumbers as $userId => $distributionNumber) {
+            if ($distributionNumber){
             for ($i = 1; $i < $distributionNumber + 1; $i++) {
                 $randCardsId = array_rand(array_flip($cardIds));
                 $key = array_search($randCardsId, $cardIds);
@@ -57,6 +59,7 @@ class DistributionController extends AbstractController
                 $card->setUser($user);
                 $card->setIsInDeck(0);
                 $this->entityManager->persist($card);
+            }
             }
         }
 
@@ -78,15 +81,17 @@ class DistributionController extends AbstractController
         }
 
         foreach ($distributionNumbers as $userId => $distributionNumber) {
-            for ($i = 1; $i < $distributionNumber + 1; $i++) {
-                $randCardsId = array_rand(array_flip($cardIds));
-                $key = array_search($randCardsId, $cardIds);
-                unset($cardIds[$key]);
-                $card = $cardRepository->find($randCardsId);
-                $user = $userRepository->find($userId);
-                $card->setUserDiscard($user);
-                $card->setIsInDeck(0);
-                $this->entityManager->persist($card);
+            if ($distributionNumber) {
+                for ($i = 1; $i < $distributionNumber + 1; $i++) {
+                    $randCardsId = array_rand(array_flip($cardIds));
+                    $key = array_search($randCardsId, $cardIds);
+                    unset($cardIds[$key]);
+                    $card = $cardRepository->find($randCardsId);
+                    $user = $userRepository->find($userId);
+                    $card->setUserDiscard($user);
+                    $card->setIsInDeck(0);
+                    $this->entityManager->persist($card);
+                }
             }
         }
 
@@ -239,6 +244,26 @@ class DistributionController extends AbstractController
             $visibleCard->setUserDiscard(null);
             $visibleCard->setUser(null);
             $visibleCard->setIsDiscard(1);
+            $visibleCard->setIsVisible(0);
+            $visibleCard->setIsPlayed(0);
+            $this->entityManager->persist($visibleCard);
+        }
+
+        $this->entityManager->flush();
+        return $this->redirectToRoute('game');
+    }
+
+    /**
+     *  @Route("/discardmyshowedcardsInPersonalDiscard", name="discard_my_showed_cards_in_personal_discard")
+     */
+    public function discardMyShowedCardsInPersonalDiscard(CardRepository $cardRepository): Response
+    {
+        $user = $this->getUser();
+        $visibleCards = $cardRepository->findBy(['isVisible' => 1, 'user'=>$user]);
+        foreach ($visibleCards as $visibleCard) {
+            $visibleCard->setUserDiscard($user);
+            $visibleCard->setUser(null);
+            $visibleCard->setIsDiscard(0);
             $visibleCard->setIsVisible(0);
             $visibleCard->setIsPlayed(0);
             $this->entityManager->persist($visibleCard);
