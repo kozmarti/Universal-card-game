@@ -102,12 +102,12 @@
                 <button type="submit">Take Card</button>
             </form>
 
-            <form action="{{ path("discard_card") }}" method="post">
-                <input type="hidden" name="card-to-discard" value="{{ c.id }}">
-                <button type="submit">Discard into global pile</button>
-            </form>
+
         {% endif %}
     {% endfor %}
+    <a class="btn btn-danger" href="{{ path("discard_all_cards") }}">Discard ALL Visible Cards</a>
+
+
 </div>
 
 <div class="card-container">
