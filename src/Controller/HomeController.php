@@ -69,7 +69,6 @@ class HomeController extends AbstractController
             'count_cards_in_deck' => count($deckCards),
             'decks' => $deckCards,
             'html' =>$html,
-            'users' =>$users,
             'last_played_card' => $lastPlayedCard,
         ]);
     }
@@ -83,15 +82,26 @@ class HomeController extends AbstractController
 
     {
         $text = $request->get('text-to-update');
-        $html = $parser->transformMarkdown($text);
         $zone = $zoneRepository->findOneBy(['id' =>1]);
-        $zone->setInformation($html);
+        $zone->setInformation($text);
         $entityManager->persist($zone);
         $entityManager->flush();
-
         return $this->json($zone, 200);
 
     }
+
+    /**
+     * @Route("/shownote", name="note_show")
+     */
+    public function noteShow(ZoneRepository $zoneRepository)
+    {
+         $zone = $zoneRepository->findOneBy(['id' =>1]);
+         $text=nl2br( $zone->getInformation());
+         dd($text);
+
+    }
+
+
 
 
 /**

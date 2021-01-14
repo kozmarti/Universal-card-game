@@ -20,8 +20,6 @@ function removeAllChildNodes(parent) {
 function autocomplete(json) {
     let textToShow=json;
     let text=textToShow.information;
-    let fill = document.createTextNode(text);
-    removeAllChildNodes(textShow);
-    textShow.appendChild(fill);
+    textShow.innerText=text;
 }
 
