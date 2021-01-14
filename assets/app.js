@@ -6,12 +6,15 @@
  */
 
 // any CSS you import will output into a single css file (app.scss in this case)
+import 'bootstrap';
 import './styles/app.scss';
 import './js/info.js';
 import './js/refresh.js';
+
 const $ = require('jquery');
 // start the Stimulus application
 require('bootstrap');
+
 
 require ('../vendor/frvaillant/mapux/Resources/assets/js/map.js')
 require('@fortawesome/fontawesome-free/css/all.min.css');
