@@ -64,9 +64,7 @@ body {
 
 .hidden-card-background{
     margin: 5px;
-    width:150px;
-    height: 200px;
-    border: 1px solid black;
+    width:140px;
     border-radius: 10px;
     background-image: url("../images/cardback.png");
     background-size: cover;
@@ -144,9 +142,9 @@ body {
 .my-visible-card-in-hand {
     padding-top: 80px;
     transition: 0.3s;
+    z-index: 1000 !important;
     &:hover{
         padding-top: 0;
-
     }
 }
 
@@ -168,5 +166,17 @@ body {
 
 .card-to-gliss-horizontal {
     height:40px;
+}
+
+
+.pile-personal-discard{
+    position: fixed;
+    bottom: 20px;
+    left:20px;
+}
+
+.my-cards-on-table{
+    display:flex;
+    z-index: 0 !important;
 }
 

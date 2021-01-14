@@ -59,6 +59,8 @@ class HomeController extends AbstractController
         $deckDiscardCards=$cardRepository->findBy(['isDiscard' => true]);
         $lastPlayedCard=$cardRepository->findLastPlayedCard();
         $users = $userRepository->findAll();
+        $cardPersonalDiscard=$cardRepository->findBy(['userDiscard' => $this->getUser()]);
+        $countPersonlDiscard=count($cardPersonalDiscard);
 
         $html = $parser->transformMarkdown('**COOOOL**');
         return $this->render('home/game.html.twig', [
@@ -70,6 +72,7 @@ class HomeController extends AbstractController
             'decks' => $deckCards,
             'html' =>$html,
             'last_played_card' => $lastPlayedCard,
+            'count_personal_discard' =>$countPersonlDiscard
         ]);
     }
 
