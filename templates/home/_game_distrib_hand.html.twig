@@ -2,7 +2,7 @@
     <div class="modal-dialog">
         <div class="modal-content">
             <div class="modal-header">
-                <h5 class="modal-title" id="exampleModalLabel">Distribute to hand</h5>
+                <h5 class="modal-title" id="exampleModalLabel">Distribute to hand <i class="fas fa-hand-paper"></i></h5>
                 <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                     <span aria-hidden="true">&times;</span>
                 </button>
@@ -12,12 +12,13 @@
                     {% for user in users %}
                         <ul>
                             <li>
-                                {{ user.username }} - <input type="number" name="{{ user.id }}" value="">
-                            </li>
+                                <div class="d-flex justify-content-between">
+                                <span><i class="fas fa-user"></i> {{ user.username }} </span><input type="number" name="{{ user.id }}" value="">
+                                </div></li>
                         </ul>
                     {% endfor %}
-                    <button type="submit" class="btn btn-success">
-                        Distribute to hands
+                    <button type="submit" class="modal-button-distribute btn btn-success">
+                        Distribute
                     </button>
                 </form>
             </div>
