@@ -48,7 +48,8 @@
                     {% if c.isVisible and not c.user %}
                         <div class="card-to-gliss">
 
-                            <div class="card bg-transparent">
+                            <div class="card bg-transparent visible-card visible-card-in-play">
+                                <div class="card-to-gliss">
                                 <img src="{{ c.image }}" class="card-img visible-card visible-card-in-play" alt="">
                                 <div class="card-img-overlay">
                                     <form class="d-flex justify-content-center" action="{{ path("take_card") }}" method="post">
@@ -56,14 +57,10 @@
                                         <button title="Take card" type="submit" class="button-hand"><i class="fas fa-hand-paper"></i></button>
                                     </form>
                                 </div>
+                                </div>
                             </div>
                                 <!-- marta code -->
-                            <img class="visible-card visible-card-in-play" src="{{ c.image }}" alt="">
-                            <form class="d-flex justify-content-center" action="{{ path("take_card") }}" method="post">
-                                <input type="hidden" name="card-to-take" value="{{ c.id }}">
-                                <button title="Take card" class="button-hand" type="submit"><i class="fas fa-hand-paper"></i></button>
 
-                            </form>
                         </div>
                     {% endif %}
                 {% endfor %}
