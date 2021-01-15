@@ -276,6 +276,10 @@ a {
     display:flex;
     align-items: center;
     height:40px;
+    .card-img-overlay {
+        display: flex;
+        align-items: center;
+    }
 }
 
 
