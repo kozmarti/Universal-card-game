@@ -36,22 +36,13 @@
                                     <div class="hidden-card-background">
                                         <img class="visible-card" src="{{ c.image }}" alt="">
                                     </div>
-                                    <form action="{{ path("take_card") }}" method="post">
-                                        <input type="hidden" name="card-to-take" value="{{ c.id }}">
-                                        <button type="submit">Take Card</button>
-                                    </form>
                                 </div>
                             {% endif %}
                         {% endif %}
                     {% endfor %}
                 </div>
 
-                <div>
-                    <div class="hidden-card-background">
-                        <img class="hidden-card" src="" alt="">
-                    </div>
-                </div>
-            </div>
+                            </div>
         {% endif %}
     </div>
     {% endfor %}

@@ -269,6 +269,14 @@ a {
     top: 30px;
 }
 
+.my-hover-button{
+    display:none;
+}
+
+.my-gliss:hover .my-hover-button {
+    display:inline;
+}
+
 
 
 .card-to-gliss-horizontal {
