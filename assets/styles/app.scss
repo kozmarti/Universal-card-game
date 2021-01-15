@@ -109,7 +109,7 @@ body {
 
 .cards-in-my-hands{
     position: fixed;
-    bottom: -20px;
+    bottom: -30px;
     display:flex;
     justify-content: center;
     align-items: center;
@@ -170,7 +170,7 @@ a {
 }
 
 .open-eye-button-discard {
-    background: -webkit-linear-gradient($button-blue1, $button-blue2);
+
     border-radius: 50%;
     box-shadow: 1px 1px 3px 2px lightgray;
     border:none;
@@ -178,6 +178,14 @@ a {
     cursor: pointer;
     margin: 5px;
     color:white;
+}
+
+.blue-b {
+    background: -webkit-linear-gradient($button-blue1, $button-blue2);
+}
+
+.green-b {
+    background: -webkit-linear-gradient($button-green1, $button-green2);
 }
 
 .fa-eye, .fa-eye-slash {
@@ -200,10 +208,22 @@ a {
     padding-top: 80px;
     transition: 0.3s;
     z-index: 1000 !important;
+    transform: scale(0.8);
     &:hover{
         padding-top: 0;
     }
 }
+
+.visible-card-in-play {
+    margin-bottom: 50px;
+    transition: 0.3s;
+
+    &:hover{
+        margin-bottom: 0;
+    }
+}
+
+
 
 .card-to-gliss{
     position: relative;
@@ -239,8 +259,16 @@ a {
 }
 
 .my-cards-on-table{
+    position: fixed;
+    bottom: 300px;
     display:flex;
     z-index: 0 !important;
+}
+
+
+.discard-container {
+
+    margin-top: 40px;
 }
 
 
