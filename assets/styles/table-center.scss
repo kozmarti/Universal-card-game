@@ -6,6 +6,7 @@
   height: 200px;
 }
 
+
 .vlad {
   .hidden-card-background{
     transform: rotate(90deg);
@@ -16,16 +17,15 @@
       margin-bottom: 50px;
       .take-button {
         display: inline;
-
       }
     }
   }
-
   display : flex;
   justify-content: center;
   position:absolute;
   left:0;
   max-width:300px;
+  padding-left: 70px;
 }
 
 .mathias {
@@ -49,6 +49,8 @@
   position: absolute;
   right: 0;
   max-width: 300px;
+  padding-right:70px;
+
 }
 
 
@@ -66,25 +68,26 @@
 }
 
 
+
 .marta {
   .hidden-card-background{
     transform: rotate(90deg);
     z-index:3;
+    transition: 0.2s;
     &:hover {
       margin-left: 50px;
+      margin-bottom: 50px;
       .take-button {
         display: inline;
-
       }
     }
   }
-
   display: flex;
   justify-content: center;
   position: absolute;
   left: 0;
   max-width: 300px;
-
+  padding-left:70px;
 }
 
 .other-players {
