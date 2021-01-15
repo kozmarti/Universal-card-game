@@ -2,7 +2,7 @@
     <div class="modal-dialog">
         <div class="modal-content">
             <div class="modal-header">
-                <h5 class="modal-title" id="exampleModalLabel">Modal title</h5>
+                <h5 class="modal-title" id="exampleModalLabel">Distribute to discard <i class="fas fa-inbox"></i></h5>
                 <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                     <span aria-hidden="true">&times;</span>
                 </button>
@@ -11,14 +11,15 @@
                 <form class="form" action="{{ path("distribute_discard") }}" method="post">
                     {% for user in users %}
                         <ul>
-                            <li>
-                                {{ user.username }} - <input type="number" name="{{ user.id }}">
-                            </li>
+                            <li >
+                                <div class="d-flex justify-content-between">
+                                    <span><i class="fas fa-user"></i>{{ user.username }}</span>
+                                    <input type="number" name="{{ user.id }}">
+                                </div></li>
                         </ul>
                     {% endfor %}
-                    <button type="submit" class="btn btn-success">
-                        Distribute to personal discard
-                    </button>
+                    <button type="submit" class="btn btn-success modal-button-distribute">
+                        Distribute
                 </form>
             </div>
         </div>
