@@ -5,17 +5,20 @@
         {% for c in cards %}
             {%  if c.user %}
                 {%  if c.user.id == app.user.id and c.isVisible == 0 %}
-                    <div class="card-to-gliss">
+                    <div class="card-to-gliss my-gliss">
 
                     <img class="my-visible-card-in-hand" src="{{ c.image }}" alt="">
-                        <form action="{{ path("play_card") }}" method="post">
+                        <form class="" action="{{ path("play_card") }}" method="post">
                             <input type="hidden" name="card-to-play" value="{{ c.id }}">
-                            <button class="green-button" title="Play card" type="submit"><i class="fa fa-arrow-up" aria-hidden="true"></i>
+                            <button class="button-idea button-put-on-my-card" title="Play card" type="submit"><i class="fa fa-arrow-up" aria-hidden="true"></i>
                             </button>
                         </form>
 
 
                     </div>
+
+
+
                 {% endif %}
             {% endif %}
         {% endfor %}

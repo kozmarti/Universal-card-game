@@ -129,7 +129,6 @@ body {
     display:none;
     position: absolute;
     top: 30px;
-
     cursor: pointer;
 }
 
@@ -205,6 +204,17 @@ a {
     color:black;
 }
 
+.button-idea {
+    background: -webkit-linear-gradient($button-green1, $button-green2);
+    border-radius: 50%;
+    box-shadow: 1px 1px 3px 2px lightgray;
+    border:none;
+    padding: 7px 12px;
+    cursor: pointer;
+    margin: 5px;
+    color:black;
+}
+
 
 .button-distribute {
     background: -webkit-linear-gradient(gray, black);
@@ -237,7 +247,7 @@ a {
 .my-visible-card-in-hand {
     padding-top: 80px;
     transition: 0.3s;
-    z-index: 1000 !important;
+
     transform: scale(0.8);
     &:hover{
         padding-top: 0;
@@ -267,6 +277,11 @@ a {
     display: inline;
     position: absolute;
     top: 30px;
+}
+
+.card-to-gliss:hover .button-put-on-my-card {
+    display: inline;
+
 }
 
 .my-hover-button{
@@ -313,4 +328,25 @@ a {
     margin-top: 40px;
 }
 
+
+.my-gliss {
+    position: relative;
+}
+
+
+.button-put-on-my-card {
+    display:none;
+    position: absolute;
+    bottom:250px;
+    left: 50px;
+    z-index: 1000;
+    background: -webkit-linear-gradient($button-green1, $button-green2);
+    border-radius: 50%;
+    box-shadow: 1px 1px 3px 2px lightgray;
+    border:none;
+    padding: 7px 12px;
+    cursor: pointer;
+    margin: 5px;
+
+}
 
