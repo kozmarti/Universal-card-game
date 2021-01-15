@@ -339,7 +339,7 @@ a {
     position: absolute;
     bottom:250px;
     left: 50px;
-    z-index: 1000;
+
     background: -webkit-linear-gradient($button-green1, $button-green2);
     border-radius: 50%;
     box-shadow: 1px 1px 3px 2px lightgray;
@@ -350,3 +350,10 @@ a {
 
 }
 
+.discard-global:hover{
+    text:white;
+}
+
+a.discard-global:hover, a.discard-personal:hover{
+    color: white;
+}
