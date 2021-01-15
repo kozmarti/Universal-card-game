@@ -29,11 +29,11 @@
 <div>
         <form action="{{ path("show_one_discarded_personal_card") }}" method="post">
             <input type="hidden" name="card-to-show">
-            <button class="open-eye-button-discard blue-b" type="submit"><i class="far fa-eye"></i> All </button>
+            <button title="Show cards" class="open-eye-button-discard blue-b" type="submit"><i class="far fa-eye"></i></button>
         </form>
         <form action="{{ path("show_last_discarded_personal_card") }}" method="post">
             <input type="hidden" name="card-to-show">
-            <button class="open-eye-button-discard green-b" type="submit"><i class="fas fa-arrow-right"></i> </button>
+            <button title="Play one card" class="open-eye-button-discard green-b" type="submit"><i class="fas fa-arrow-right"></i> </button>
         </form>
 </div>
 </div>
@@ -47,11 +47,11 @@
                     <div class="discard-container">
                         <form action="{{ path("discard_my_showed_cards") }}" method="post">
                             <input type="hidden" name="cards-to-discard">
-                            <button title="Discard in global deck" class="discard-global" type="submit"><i class="fas fa-trash-alt"></i><i class="fas fa-users"></i></button>
+                            <button title="Discard to global deck" class="discard-global" type="submit"><i class="fas fa-trash-alt"></i><i class="fas fa-users"></i></button>
                         </form>
                         <form action="{{ path("discard_my_showed_cards_in_personal_discard") }}" method="post">
                             <input type="hidden" name="cards-to-discard">
-                            <button title="Discard in personal deck" class="discard-personal"  type="submit"><i class="fas fa-trash-alt"></i> <i class="fas fa-user"></i></button>
+                            <button title="Discard to personal deck" class="discard-personal"  type="submit"><i class="fas fa-trash-alt"></i> <i class="fas fa-user"></i></button>
                         </form>
                     </div>
                 {% endif %}
@@ -69,11 +69,11 @@
                     <div class="discard-container">
                         <form action="{{ path("discard_my_showed_cards") }}" method="post">
                             <input type="hidden" name="cards-to-discard">
-                            <button title="Discard in global deck" class="discard-global" type="submit"><i class="fas fa-trash-alt"></i><i class="fas fa-users"></i></button>
+                            <button title="Discard to global deck" class="discard-global" type="submit"><i class="fas fa-trash-alt"></i><i class="fas fa-users"></i></button>
                         </form>
                         <form action="{{ path("discard_my_showed_cards_in_personal_discard") }}" method="post">
                             <input type="hidden" name="cards-to-discard">
-                            <button title="Discard in personal deck" class="discard-personal"  type="submit"><i class="fas fa-trash-alt"></i> <i class="fas fa-user"></i></button>
+                            <button title="Discard to personal deck" class="discard-personal"  type="submit"><i class="fas fa-trash-alt"></i> <i class="fas fa-user"></i></button>
                         </form>
                     </div>
                 {% endif %}

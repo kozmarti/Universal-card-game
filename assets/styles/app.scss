@@ -129,7 +129,7 @@ body {
     display:none;
     position: absolute;
     top: 30px;
-    transition: 2s;
+
     cursor: pointer;
 }
 
@@ -140,7 +140,7 @@ body {
     box-shadow: 1px 1px 3px 2px lightgray;
     border:none;
     padding: 10px 12px;
-    transition: 2s;
+
     cursor: pointer;
     color: white;
     margin: 5px;
@@ -164,7 +164,6 @@ a {
     position: fixed;
     bottom: 30px;
     right: 420px;
-    transition: 2s;
     cursor: pointer;
     z-index:1000;
 }
@@ -186,6 +185,37 @@ a {
 
 .green-b {
     background: -webkit-linear-gradient($button-green1, $button-green2);
+    border-radius: 50%;
+    box-shadow: 1px 1px 3px 2px lightgray;
+    border:none;
+    padding: 7px 12px;
+    cursor: pointer;
+    margin: 5px;
+    color:white;
+}
+
+.button-hand {
+    background: -webkit-linear-gradient(orange, yellow);
+    border-radius: 50%;
+    box-shadow: 1px 1px 3px 2px lightgray;
+    border:none;
+    padding: 7px 12px;
+    cursor: pointer;
+    margin: 5px;
+    color:black;
+}
+
+
+.button-distribute {
+    background: -webkit-linear-gradient(gray, black);
+
+    border-radius: 50%;
+    box-shadow: 1px 1px 3px 2px lightgray;
+    border:none;
+    padding: 7px 12px;
+    cursor: pointer;
+    margin: 5px;
+    color:white;
 }
 
 .fa-eye, .fa-eye-slash {
