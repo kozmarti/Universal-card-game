@@ -4,55 +4,45 @@
     <div class="other-players {{ p.username }}">
         {% if p.id != app.user.id %}
             <div class="other-players-name">
-                <h3>{{ p.username }}</h3>
+                <h3 class="d-flex flex-column justify-content-center align-items-center"> <i class="fas fa-user"></i>  <span>{{ p.username }}</span></h3>
             </div>
             <div class="card-container">
-
                     {% for c in cards %}
                         {% if c.user %}
                             {% if c.user.id == p.id and c.isVisible == 0 %}
-
                                 <div class="card-to-gliss-horizontal">
                                     <div class="hidden-card-background card-horizontal">
-                                        <img class="hidden-card other-players-card" src="{{ c.image }}" alt="">
-                                        <form class="" action="{{ path("take_card") }}" method="post">
-                                            <input type="hidden" name="card-to-take" value="{{ c.id }}">
-                                            <button class="take-button btn btn-dark" title="Take card" type="submit"><i
-                                                        class="fas fa-hand-paper" aria-hidden="true"></i>
-                                            </button>
-                                        </form>
+                                        <div class="card bg-transparent">
+                                            <img src="{{ asset('build/images/cardback.png') }}" class="card-img" alt="">
+                                            <div class="card-img-overlay">
+                                                <form class="" action="{{ path("take_card") }}" method="post">
+                                                    <input type="hidden" name="card-to-take" value="{{ c.id }}">
+                                                    <button class="take-button button-hand" title="Take card" type="submit"><i class="fas fa-hand-paper"></i>
+                                                    </button>
+                                                </form>
+                                            </div>
+                                        </div>
                                     </div>
                                 </div>
-
                             {% endif %}
                         {% endif %}
                     {% endfor %}
-
 
                 <div>
                     {% for c in cards %}
                         {% if c.user %}
                             {% if c.user.id == p.id and c.isVisible == 1 %}
-                    <div class="card-to-gliss-horizontal">
-                                <div class="hidden-card-background">
-                                    <img class="visible-card" src="{{ c.image }}" alt="">
+                                <div class="card-to-gliss-horizontal">
+                                    <div class="hidden-card-background">
+                                        <img class="visible-card" src="{{ c.image }}" alt="">
+                                    </div>
                                 </div>
-                                <form action="{{ path("take_card") }}" method="post">
-                                    <input type="hidden" name="card-to-take" value="{{ c.id }}">
-                                    <button type="submit">Take Card</button>
-                                </form>
-                    </div>
                             {% endif %}
                         {% endif %}
                     {% endfor %}
                 </div>
 
-                <div>
-                    <div class="hidden-card-background">
-                        <img class="hidden-card" src="" alt="">
-                    </div>
-                </div>
-            </div>
+                            </div>
         {% endif %}
     </div>
     {% endfor %}
