@@ -12,22 +12,22 @@
                                     {% if count_cards_in_discard_deck == 0 %}
                                         <h3>No more cards available!</h3>
                                     {% else %}
-                                    <a class="btn btn-secondary" href="{{ path("put_back_discarded") }}"><i class="fas fa-sync-alt"></i></a>
+                                    <a class="button-distribute" href="{{ path("put_back_discarded") }}"><i class="fas fa-sync-alt"></i></a>
                                     {% endif %}
                                 {% else %}
-                                    <a class="btn btn-dark" href="{{ path("distribute_one_card") }}"><i class="fas fa-hand-paper"></i></a>
+                                    <a title="Take card" class="button-hand" href="{{ path("distribute_one_card") }}"><i class="fas fa-hand-paper"></i></a>
                                     <div class="mid">
-                                        <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#hand">
+                                        <button title="Distribute cards to players' hands" type="button" class="button-distribute" data-toggle="modal" data-target="#hand">
                                             <i class="fas fa-expand-arrows-alt"></i>
                                         </button>
                                         <h3>{{ count_cards_in_deck }} </h3>
-                                        <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#personal-discard">
+                                        <button title="Distribute cards to personal discard" class="button-distribute" type="button" data-toggle="modal" data-target="#personal-discard">
                                             <i class="fas fa-inbox"></i>
                                         </button>
                                     </div>
                                     <form action="{{ path("play_deck_card") }}" method="post">
                                         <input type="hidden" name="card-to-play" value="from-deck-to-play">
-                                        <button type="submit"><i class="fas fa-arrow-down"></i></button>
+                                        <button title="Play one card" class="green-b" type="submit"><i class="fas fa-arrow-down"></i></button>
                                     </form>
                                 {% endif %}
                             </div>
@@ -50,7 +50,7 @@
                             <img class="visible-card visible-card-in-play" src="{{ c.image }}" alt="">
                             <form class="d-flex justify-content-center" action="{{ path("take_card") }}" method="post">
                                 <input type="hidden" name="card-to-take" value="{{ c.id }}">
-                                <button type="submit"><i class="fas fa-hand-paper"></i></button>
+                                <button title="Take card" class="button-hand" type="submit"><i class="fas fa-hand-paper"></i></button>
 
                             </form>
 
@@ -73,7 +73,7 @@
     </div>
 
     {%  endif %}
-    
+
 
     <!--
 <div class="card-container">
