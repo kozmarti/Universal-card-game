@@ -10,6 +10,7 @@
   .hidden-card-background{
     transform: rotate(90deg);
     z-index:3;
+    transition: 0.2s;
     &:hover {
       margin-left: 50px;
       .take-button {
@@ -30,10 +31,13 @@
   .hidden-card-background {
     transform: rotate(90deg);
     z-index:3;
+    transition: 0.2s;
     &:hover {
       margin-right:50px;
+
       .take-button {
         display: inline;
+
 
       }
     }
